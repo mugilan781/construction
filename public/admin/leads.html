@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Leads - InfraNest Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { colors: { primary: '#1e3a5f', secondary: '#0f1f35', accent: '#c9a96e' } }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 flex min-h-screen text-gray-800 font-sans">
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
+    
+    <!-- Sidebar -->
+    <aside id="adminSidebar" class="w-64 bg-white shadow-2xl flex flex-col z-50 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-300 ease-in-out h-screen">
+        <div class="h-16 flex items-center justify-center border-b border-gray-200 px-6">
+            <h1 class="text-xl font-bold text-primary tracking-wide">INFRA<span class="text-secondary">NEST</span></h1>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-4 space-y-1">
+            <a href="dashboard.html" class="sidebar-link flex items-center px-6 py-3 text-sm font-medium text-gray-600">
+                <i class="fas fa-chart-line w-6 text-center mr-2"></i> Dashboard
+            </a>
+            <a href="projects.html" class="sidebar-link flex flex-row items-center px-6 py-3 text-sm font-medium text-gray-600">
+                <i class="fas fa-building w-6 text-center mr-2"></i> Projects
+            </a>
+            <a href="services.html" class="sidebar-link flex flex-row items-center px-6 py-3 text-sm font-medium text-gray-600">
+                <i class="fas fa-tools w-6 text-center mr-2"></i> Services
+            </a>
+            <a href="leads.html" class="sidebar-link active flex flex-row items-center px-6 py-3 text-sm font-medium">
+                <i class="fas fa-users w-6 text-center mr-2"></i> Leads
+            </a>
+            <div class="px-6 py-2 mt-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Content</div>
+            <a href="blogs.html" class="sidebar-link flex flex-row items-center px-6 py-3 text-sm font-medium text-gray-600">
+                <i class="fas fa-newspaper w-6 text-center mr-2"></i> Blogs
+            </a>
+            <a href="testimonials.html" class="sidebar-link flex flex-row items-center px-6 py-3 text-sm font-medium text-gray-600">
+                <i class="fas fa-comment-dots w-6 text-center mr-2"></i> Testimonials
+            </a>
+            <a href="company.html" class="sidebar-link flex flex-row items-center px-6 py-3 text-sm font-medium text-gray-600">
+                <i class="fas fa-info-circle w-6 text-center mr-2"></i> Company Info
+            </a>
+        </nav>
+        <div class="p-4 border-t border-gray-200">
+            <button id="logoutBtn" class="w-full flex items-center text-sm font-medium text-red-600 hover:text-red-800 transition py-2 px-4 rounded hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col min-h-screen overflow-hidden">
+        
+        <!-- Header -->
+        <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6 z-0">
+            <div class="flex items-center">
+                <button id="mobileMenuBtn" class="md:hidden text-gray-500 hover:text-gray-700 p-2 mr-2 rounded focus:outline-none focus:bg-gray-100">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h2 class="text-lg font-medium text-gray-800">Manage Leads</h2>
+            </div>
+            <div class="flex items-center">
+                <div class="flex items-center text-sm font-medium text-gray-700 bg-gray-100 py-1.5 px-3 rounded-full cursor-pointer hover:bg-gray-200 transition">
+                    <i class="fas fa-user-circle text-gray-500 text-lg mr-2"></i>
+                    <span id="adminUserName">Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 fade-in">
+            
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center space-x-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Enquiries & Leads</h3>
+                    <select id="leadFilter" onchange="filterLeads()" class="border border-gray-300 bg-white text-gray-700 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2 outline-none">
+                        <option value="all">All Sources</option>
+                        <option value="contact_form">Contact Form</option>
+                        <option value="quote_request">Quote Request</option>
+                    </select>
+                </div>
+                <button id="exportBtn" onclick="exportLeads()" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition duration-200 shadow">
+                    <i class="fas fa-file-export mr-1"></i> Export Leads
+                </button>
+            </div>
+
+            <!-- Leads Table -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 w-full text-sm">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Name & Contact</th>
+                                <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Budget</th>
+                                <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Requirement</th>
+                                <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Loader -->
+                            <tr><td colspan="6" class="px-6 py-10 text-center"><div class="loader"></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- View Lead Modal -->
+    <div id="leadModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 flex items-center justify-center fade-in">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden m-4">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+                <h3 class="text-lg font-semibold text-gray-800">Lead Details</h3>
+                <button onclick="closeLeadModal()" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4 text-sm" id="leadDetailsContent">
+                <!-- Injected via JS -->
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 flex justify-end">
+                <button onclick="closeLeadModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-y-20 opacity-0 flex items-center z-50">
+        <i id="toastIcon" class="mr-2"></i>
+        <span id="toastMsg"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/confirm-modal.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/pages/leads.js"></script>
+</body>
+</html>

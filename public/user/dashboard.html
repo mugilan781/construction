@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfraNest - My Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#0f1f35',
+                        accent: '#c9a96e',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <nav class="bg-primary text-white py-4 px-6 md:px-12 flex justify-between items-center sticky top-0 z-50 shadow-md">
+        <a href="../index.html" class="text-2xl font-bold">Infra<span class="text-accent">Nest</span></a>
+        <div class="flex items-center gap-4">
+            <span id="userNameDisplay" class="hidden md:inline text-sm opacity-80">Welcome, User</span>
+            <button id="logoutBtn" class="bg-accent hover:bg-yellow-600 text-secondary font-bold py-2 px-4 rounded-lg transition duration-300 text-sm">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6 mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Profile Card -->
+            <div class="col-span-1 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center text-3xl text-primary font-bold mb-4" id="userInitials">
+                        U
+                    </div>
+                    <h2 class="text-xl font-bold text-primary mb-1" id="profileName">User Name</h2>
+                    <p class="text-gray-500 text-sm mb-4" id="profileEmail">user@example.com</p>
+                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Regular User</span>
+                </div>
+                <hr class="my-6">
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Member Since</span>
+                        <span class="font-medium">April 2026</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Status</span>
+                        <span class="text-green-600 font-medium">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Welcome/Main Content -->
+            <div class="col-span-1 md:col-span-2 space-y-6">
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                    <h1 class="text-3xl font-bold text-primary mb-4">Welcome to <span class="text-accent">InfraNest</span></h1>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        We're excited to have you here! Your partnership helps us build a more sustainable and beautiful future. This dashboard will soon feature more tools to track your project requests and updates.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="../projects.html" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition shadow-md">Explore Projects</a>
+                        <a href="../contact.html?tab=quote" class="bg-white border-2 border-primary text-primary px-6 py-3 rounded-lg hover:bg-gray-50 transition">Get a Quote</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg text-primary">
+                            <i class="fas fa-file-invoice-dollar text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Recent Quotes</h4>
+                            <p class="text-sm text-gray-500">0 pending requests</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="bg-yellow-50 p-4 rounded-lg text-accent">
+                            <i class="fas fa-tools text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Active Projects</h4>
+                            <p class="text-sm text-gray-500">No active constructions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-12 py-8 text-center text-gray-400 text-sm">
+        &copy; 2026 InfraNest Solutions. All rights reserved.
+    </footer>
+
+    <script>
+        // Authentication Check Logic
+        const checkAuth = () => {
+            const role = localStorage.getItem('role');
+            const token = localStorage.getItem('token');
+            if (!role || role !== 'user' || !token) {
+                window.location.href = '../login.html';
+                return false;
+            }
+            return true;
+        };
+
+        // Check if logged in on initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!checkAuth()) return;
+
+            const email = localStorage.getItem('email');
+            const name = localStorage.getItem('name');
+
+            // Populate page
+            if (name) {
+                document.getElementById('userNameDisplay').textContent = `Welcome, ${name}`;
+                document.getElementById('profileName').textContent = name;
+                document.getElementById('userInitials').textContent = name.charAt(0).toUpperCase();
+            }
+            if (email) {
+                document.getElementById('profileEmail').textContent = email;
+                if (!name) document.getElementById('userInitials').textContent = email.charAt(0).toUpperCase();
+            }
+
+            // Logout logic
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.clear();
+                window.location.href = '../login.html';
+            });
+        });
+
+        // BFCache Protection: Force re-check when navigating back/forward
+        window.addEventListener('pageshow', (event) => {
+            checkAuth();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — InfraNest</title>
+  <meta name="description" content="The page you’re looking for may have been moved, removed, or doesn’t exist.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Navbar Fix */
+    .navbar { 
+      background: rgba(15, 31, 53, 0.94) !important; 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.05); 
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2) !important;
+    }
+
+    /* Error Page Variables & Base */
+    .error-section {
+      position: relative;
+      min-height: calc(100vh - 80px); /* Adjusting for potential navbar overlap */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(201,169,110,0.04) 0%, rgba(255,255,255,1) 100%);
+      padding: 100px 20px;
+    }
+
+    /* Giant Faded Background Text */
+    .error-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28rem; /* Adjusted size */
+      font-weight: 800;
+      color: rgba(201,169,110,0.12); /* Slightly increased visibility */
+      z-index: 0;
+      user-select: none;
+      font-family: 'Inter', sans-serif;
+      line-height: 1;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* Foreground Content */
+    .error-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 650px;
+      opacity: 0;
+      animation: fadeUpContent 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeUpContent {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography */
+    .error-title {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .error-desc {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Buttons Container */
+    .error-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* Custom Outline Button (Secondary) */
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 35px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: transparent;
+      border: 2px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius-sm); /* Matches standard button radius */
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .btn-primary {
+       border: 2px solid transparent;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .error-bg-text { font-size: 20rem; }
+    }
+    @media (max-width: 768px) {
+      .error-section { min-height: 80vh; }
+      .error-bg-text { font-size: 14rem; }
+      .error-title { font-size: 2.5rem; }
+      .error-desc { font-size: 1.05rem; margin-bottom: 35px; }
+      .error-actions { flex-direction: column; gap: 15px; width: 100%; max-width: 300px; margin: 0 auto; }
+      .error-actions a { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .error-bg-text { font-size: 10rem; }
+      .error-title { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">Infra<span style="color: var(--accent);">Nest</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="contact.html?tab=quote" class="nav-cta">Get a Quote</a>
+      <div class="user-menu">
+        <div class="user-icon" onclick="toggleUserMenu()"><i class="fas fa-user"></i></div>
+        <div class="user-dropdown" id="userDropdown">
+          <!-- Populated by updateUserMenu() in main.js -->
+        </div>
+      </div>
+      
+    </div>
+    <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- 404 ERROR SECTION -->
+  <section class="error-section">
+    <!-- Faded Background Number -->
+    <div class="error-bg-text">404</div>
+    
+    <!-- Main Content -->
+    <div class="error-content">
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-desc">
+        The page you’re looking for may have been moved, removed, or doesn’t exist. Let’s guide you back to the right place.
+      </p>
+      <div class="error-actions">
+        <!-- Gold Primary Button -->
+        <a href="index.html" class="btn btn-primary"><i class="fas fa-home" style="margin-right: 8px;"></i> Back to Home</a>
+        <!-- Outline Secondary Button -->
+        <a href="contact.html" class="btn-outline"><i class="fas fa-envelope" style="margin-right: 8px;"></i> Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <!-- Col 1: Logo & Social -->
+      <div class="footer-about">
+        <a href="index.html" class="footer-logo">Infra<span>Nest</span></a>
+        <p class="dynamic-about">Delivering premium construction solutions with unmatched precision, quality, and innovation since 2005.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <!-- Col 2: Quick Links -->
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+      <!-- Col 3: Services -->
+      <div class="footer-links">
+        <h4>Services</h4>
+        <a href="service-detail.html?service=construction">Construction</a>
+        <a href="service-detail.html?service=interior">Interior Design</a>
+        <a href="service-detail.html?service=renovation">Renovation</a>
+        <a href="service-detail.html?service=architecture">Architecture Planning</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      
+      <!-- Col 4: Contact Info -->
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt" style="margin-top:4px;"></i><span class="dynamic-address">123 Builder's Avenue, Chennai,<br>Tamil Nadu 600001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span class="dynamic-phone">+91 98765 43210</span></div>
+        <div class="footer-contact-item" style="margin-bottom:0;"><i class="fas fa-envelope"></i><span class="dynamic-email">info@infranest.com</span></div>
+      </div>
+      
+      <!-- Col 5: Newsletter -->
+      <div class="footer-newsletter">
+        <h4>Newsletter</h4>
+        <p style="font-size:0.875rem; margin-bottom:16px; color:rgba(255,255,255,0.65); line-height:1.6; text-align:left;">Subscribe for construction tips, project updates, and industry news.</p>
+        <form class="footer-newsletter-form" onsubmit="event.preventDefault()">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin: 0;">&copy; 2025 InfraNest. All rights reserved. Crafted with excellence.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer>
+  <a href="contact.html?tab=quote" class="floating-cta" title="Get a Quote"><i class="fas fa-paper-plane"></i></a>
+
+  <!-- REQUIRED SCRIPTS -->
+  <script src="js/main.js"></script>
+</body>
+</html>

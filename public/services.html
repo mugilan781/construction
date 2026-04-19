@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services — InfraNest</title>
+  <meta name="description" content="Explore InfraNest's comprehensive construction services including construction, interior design, renovation, and architecture planning.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .service-card { padding: 0 !important; overflow: hidden; }
+    .service-img-wrapper { position: relative; overflow: hidden; height: 260px; border-bottom: 2px solid var(--accent); }
+    .service-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .service-card:hover .service-img { transform: scale(1.06); }
+    .service-card-content { padding: 40px 45px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">Infra<span style="color: var(--accent);">Nest</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html" class="active">Services</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="contact.html?tab=quote" class="nav-cta">Get a Quote</a>
+      <div class="user-menu">
+        <div class="user-icon" onclick="toggleUserMenu()"><i class="fas fa-user"></i></div>
+        <div class="user-dropdown" id="userDropdown">
+          <!-- Populated by updateUserMenu() in main.js -->
+        </div>
+      </div>
+      
+    </div>
+    <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Our Services</h1>
+    <p class="page-header-desc">We deliver comprehensive construction and design solutions tailored to modern living — combining innovation, precision, and timeless craftsmanship.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <span>Services</span></div>
+  </div>
+
+  <section class="section">
+    <div class="section-header fade-up">
+      <div class="section-subtitle">What We Offer</div>
+      <h2 class="section-title">Comprehensive Construction Solutions</h2>
+      <p class="section-desc">We provide end-to-end services to transform your construction vision into reality, from planning to execution.</p>
+    </div>
+
+    <div class="grid-2 fade-up" id="dynamicServicesGrid" style="gap:40px;">
+      <div id="servicesLoading" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--accent);">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+        <p style="margin-top: 10px;">Loading services...</p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        const grid = document.getElementById('dynamicServicesGrid');
+        const loading = document.getElementById('servicesLoading');
+        
+        try {
+          const response = await fetch('/api/services');
+          const result = await response.json();
+          
+          if (result.success && result.data && result.data.length > 0) {
+            loading.style.display = 'none';
+            grid.innerHTML = '';
+            
+            result.data.forEach((service, i) => {
+              // Map DB services to an image for UI
+              const imgMap = {
+                'construction': 'images/service-construction.png',
+                'interior design': 'images/interior-livingroom.png',
+                'renovation': 'images/project-before.png',
+                'architecture planning': 'images/about-team.png'
+              };
+              const titleLower = service.name ? service.name.toLowerCase() : '';
+              let imgSrc = 'images/service-construction.png';
+              
+              for (const [key, val] of Object.entries(imgMap)) {
+                if (titleLower.includes(key)) {
+                  imgSrc = val;
+                  break;
+                }
+              }
+
+              const icon = service.icon || 'fas fa-building';
+              const delay = i * 0.1;
+              
+              const cardHTML = `
+                <a href="service-detail.html?id=${service.id}" class="service-card" style="text-align:left; border-radius: var(--radius-lg); animation-delay: ${delay}s; text-decoration: none; color: inherit; display: block;">
+                  <div class="service-img-wrapper">
+                    <img src="${imgSrc}" alt="${service.name}" class="service-img">
+                  </div>
+                  <div class="service-card-content">
+                    <div style="display:flex; align-items:center; gap:20px; margin-bottom:24px;">
+                      <div class="service-icon" style="margin:0;"><i class="${icon}"></i></div>
+                      <h3 class="card-title" style="margin:0; font-size:1.4rem;">${service.name}</h3>
+                    </div>
+                    <p class="card-text" style="line-height:1.75; max-width:100%; min-height: 80px;">${service.description}</p>
+                    <ul style="margin:24px 0; color:var(--text-secondary); font-size:0.92rem; min-height: 105px;">
+                      <li style="padding:7px 0;"><i class="fas fa-check" style="color:var(--accent); margin-right:12px; font-size:0.85rem;"></i> ${service.process || 'End-to-end management'}</li>
+                      <li style="padding:7px 0;"><i class="fas fa-check" style="color:var(--accent); margin-right:12px; font-size:0.85rem;"></i> ${service.benefits || 'Premium quality assurance'}</li>
+                      <li style="padding:7px 0;"><i class="fas fa-check" style="color:var(--accent); margin-right:12px; font-size:0.85rem;"></i> Expert professional execution</li>
+                    </ul>
+                    <span class="btn btn-accent-outline" style="padding:11px 28px; font-size:0.85rem; display: inline-block;">View Details →</span>
+                  </div>
+                </a>
+              `;
+              grid.insertAdjacentHTML('beforeend', cardHTML);
+            });
+            
+          } else {
+             grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-light);">No services found.</div>';
+          }
+        } catch (err) {
+          console.error('Error fetching services:', err);
+          grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: red;">Failed to load services. Please try again.</div>';
+        }
+      });
+    </script>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-dark" style="text-align:center; position:relative; overflow:hidden;">
+    <div style="position:absolute; inset:0; background: radial-gradient(circle at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 60%);"></div>
+    <div class="fade-up" style="position:relative; z-index:1;">
+      <h2 class="section-title" style="color:var(--white);">Bespoke Solutions</h2>
+      <p style="color:rgba(255,255,255,0.6); max-width:540px; margin:0 auto 36px; font-family:'Inter', sans-serif; line-height: 1.8;">Let's discuss your unique project requirements and craft a tailored plan that exceeds architectural expectations.</p>
+      <a href="contact.html?tab=quote" class="btn btn-primary" style="padding: 16px 42px; font-size: 0.95rem; box-shadow: 0 4px 20px rgba(201,169,110,0.25);"><i class="fas fa-paper-plane"></i> Request a Consultation</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+          <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <!-- Col 1: Logo & Social -->
+      <div class="footer-about">
+        <a href="index.html" class="footer-logo">Infra<span>Nest</span></a>
+        <p class="dynamic-about">Delivering premium construction solutions with unmatched precision, quality, and innovation since 2005.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <!-- Col 2: Quick Links -->
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+      <!-- Col 3: Services -->
+      <div class="footer-links">
+        <h4>Services</h4>
+        <a href="service-detail.html?service=construction">Construction</a>
+        <a href="service-detail.html?service=interior">Interior Design</a>
+        <a href="service-detail.html?service=renovation">Renovation</a>
+        <a href="service-detail.html?service=architecture">Architecture Planning</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      
+      <!-- Col 4: Contact Info -->
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt" style="margin-top:4px;"></i><span class="dynamic-address">123 Builder's Avenue, Chennai,<br>Tamil Nadu 600001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span class="dynamic-phone">+91 98765 43210</span></div>
+        <div class="footer-contact-item" style="margin-bottom:0;"><i class="fas fa-envelope"></i><span class="dynamic-email">info@infranest.com</span></div>
+      </div>
+      
+      <!-- Col 5: Newsletter -->
+      <div class="footer-newsletter">
+        <h4>Newsletter</h4>
+        <p style="font-size:0.875rem; margin-bottom:16px; color:rgba(255,255,255,0.65); line-height:1.6; text-align:left;">Subscribe for construction tips, project updates, and industry news.</p>
+        <form class="footer-newsletter-form" onsubmit="event.preventDefault()">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin: 0;">&copy; 2025 InfraNest. All rights reserved. Crafted with excellence.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer>
+  <a href="contact.html?tab=quote" class="floating-cta" title="Get a Quote"><i class="fas fa-paper-plane"></i></a>
+  <script src="js/main.js"></script>
+</body>
+</html>

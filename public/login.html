@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfraNest - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#0f1f35',
+                        accent: '#c9a96e',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active { background: #1e3a5f; color: white; }
+        .tab-btn:not(.active) { background: #f3f4f6; color: #4b5563; }
+        .tab-btn:not(.active):hover { background: #e5e7eb; }
+        .form-panel { display: none; }
+        .form-panel.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-md fade-in">
+        <div class="text-center mb-6">
+            <a href="index.html" class="text-3xl font-bold text-primary inline-block mb-2">Infra<span class="text-accent">Nest</span></a>
+            <p class="text-gray-500" id="formSubtitle">Sign in to your account</p>
+        </div>
+
+        <!-- Back to Login Link (hidden by default) -->
+        <div id="backToLogin" class="hidden mb-4">
+            <a href="#" onclick="showLoginForm(); return false;" class="text-sm text-primary flex items-center gap-1 hover:underline">
+                <i class="fas fa-arrow-left"></i> Back to Login
+            </a>
+        </div>
+
+        <!-- Tab Switcher (hidden when resetting password) -->
+        <div id="authTabs" class="flex rounded-lg overflow-hidden mb-6 border border-gray-200">
+            <button id="tabLogin" class="tab-btn active flex-1 py-2.5 text-sm font-semibold text-center rounded-l-lg" onclick="switchTab('login')">Sign In</button>
+            <button id="tabSignup" class="tab-btn flex-1 py-2.5 text-sm font-semibold text-center rounded-r-lg" onclick="switchTab('signup')">Create Account</button>
+        </div>
+
+        <!-- Status Message -->
+        <div id="statusMsg" class="hidden p-4 mb-6 rounded border-l-4" role="alert">
+            <p></p>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" class="form-panel active space-y-5">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="loginPassword">Password</label>
+                <div class="relative">
+                    <input type="password" id="loginPassword" class="w-full px-4 py-3 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="••••••••" required autocomplete="current-password">
+                    <button type="button" class="toggle-pw absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition duration-200 focus:outline-none" aria-label="Toggle password visibility">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" id="loginBtn" class="w-full bg-primary text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-800 transition shadow-lg hover:shadow-xl flex justify-center items-center">
+                <span>Sign In</span>
+                <i class="fas fa-spinner fa-spin ml-2 hidden btn-loader"></i>
+            </button>
+
+            <div class="text-center mt-3">
+                <a href="#" onclick="showForgotForm(); return false;" class="text-sm text-gray-500 hover:text-primary transition">Forgot Password?</a>
+            </div>
+
+            <p class="text-center text-sm text-gray-500 mt-4">Don't have an account? <a href="#" onclick="switchTab('signup'); return false;" class="text-primary font-bold hover:underline">Create one</a></p>
+        </form>
+
+        <!-- FORGOT PASSWORD FORM -->
+        <form id="forgotForm" class="form-panel space-y-5">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="forgotEmail">Email Address</label>
+                <input type="email" id="forgotEmail" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="you@example.com" required>
+            </div>
+
+            <button type="submit" id="forgotBtn" class="w-full bg-primary text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-800 transition shadow-lg hover:shadow-xl flex justify-center items-center">
+                <span>Send OTP</span>
+                <i class="fas fa-spinner fa-spin ml-2 hidden btn-loader"></i>
+            </button>
+        </form>
+
+        <!-- RESET PASSWORD FORM (OTP Verification) -->
+        <form id="resetForm" class="form-panel space-y-5">
+            <div class="bg-blue-50 p-3 rounded-lg text-xs text-primary flex items-start gap-2 mb-4">
+                <i class="fas fa-info-circle mt-0.5"></i>
+                <span>Please enter the 6-digit OTP sent to your email and your new password.</span>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="resetOtp">Enter 6-Digit OTP</label>
+                <input type="text" id="resetOtp" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition text-center tracking-widest font-bold" placeholder="000000" maxlength="6" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="resetPassword">New Password</label>
+                <input type="password" id="resetPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="••••••••" required minlength="6">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="resetConfirmPassword">Confirm New Password</label>
+                <input type="password" id="resetConfirmPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="••••••••" required minlength="6">
+            </div>
+
+            <button type="submit" id="resetSubmitBtn" class="w-full bg-primary text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-800 transition shadow-lg hover:shadow-xl flex justify-center items-center">
+                <span>Update Password</span>
+                <i class="fas fa-spinner fa-spin ml-2 hidden btn-loader"></i>
+            </button>
+        </form>
+
+        <!-- SIGNUP FORM -->
+        <form id="signupForm" class="form-panel space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1" for="signupName">Full Name</label>
+                <input type="text" id="signupName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="John Doe" required autocomplete="name">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1" for="signupEmail">Email Address</label>
+                <input type="email" id="signupEmail" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="you@example.com" required autocomplete="email">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1" for="signupPassword">Password</label>
+                <div class="relative">
+                    <input type="password" id="signupPassword" class="w-full px-4 py-3 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+                    <button type="button" class="toggle-pw absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition duration-200 focus:outline-none" aria-label="Toggle password visibility">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1" for="signupConfirmPassword">Confirm Password</label>
+                <input type="password" id="signupConfirmPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+            </div>
+
+            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" style="margin-top:12px;"></div>
+
+            <button type="submit" id="signupBtn" class="w-full bg-primary text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-800 transition shadow-lg hover:shadow-xl flex justify-center items-center mt-4">
+                <span>Create Account</span>
+                <i class="fas fa-spinner fa-spin ml-2 hidden btn-loader"></i>
+            </button>
+
+            <p class="text-center text-sm text-gray-500 mt-4">Already have an account? <a href="#" onclick="switchTab('login'); return false;" class="text-primary font-bold hover:underline">Sign In</a></p>
+        </form>
+    </div>
+
+    <script>
+        // ==================== TAB SWITCHING ====================
+        function switchTab(tab) {
+            const subtitle = document.getElementById('formSubtitle');
+            const authTabs = document.getElementById('authTabs');
+            const backToLogin = document.getElementById('backToLogin');
+            
+            // Hide reset forms and show tabs
+            authTabs.classList.remove('hidden');
+            backToLogin.classList.add('hidden');
+            document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+
+            if (tab === 'login') {
+                document.getElementById('tabLogin').classList.add('active');
+                document.getElementById('tabSignup').classList.remove('active');
+                document.getElementById('loginForm').classList.add('active');
+                subtitle.textContent = 'Sign in to your account';
+            } else {
+                document.getElementById('tabSignup').classList.add('active');
+                document.getElementById('tabLogin').classList.remove('active');
+                document.getElementById('signupForm').classList.add('active');
+                subtitle.textContent = 'Create a new account';
+            }
+            hideStatus();
+        }
+
+        function showForgotForm() {
+            const authTabs = document.getElementById('authTabs');
+            const backToLogin = document.getElementById('backToLogin');
+            const subtitle = document.getElementById('formSubtitle');
+
+            authTabs.classList.add('hidden');
+            backToLogin.classList.remove('hidden');
+            
+            document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('forgotForm').classList.add('active');
+            subtitle.textContent = 'Reset your password';
+            hideStatus();
+        }
+
+        function showLoginForm() {
+            switchTab('login');
+        }
+
+        // ==================== PASSWORD TOGGLES ====================
+        document.querySelectorAll('.toggle-pw').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const input = btn.previousElementSibling;
+                const icon = btn.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+
+        // ==================== STATUS HELPER ====================
+        function showStatus(msg, type) {
+            const statusMsg = document.getElementById('statusMsg');
+            const statusText = statusMsg.querySelector('p');
+            statusText.textContent = msg;
+            statusMsg.classList.remove('hidden', 'bg-red-100', 'border-red-500', 'text-red-700', 'bg-green-100', 'border-green-500', 'text-green-700');
+            if (type === 'error') {
+                statusMsg.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
+            } else {
+                statusMsg.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+            }
+        }
+
+        function hideStatus() {
+            const statusMsg = document.getElementById('statusMsg');
+            if (statusMsg) statusMsg.classList.add('hidden');
+        }
+
+        // ==================== LOGIN HANDLER ====================
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const loader = btn.querySelector('.btn-loader');
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+            document.getElementById('statusMsg').classList.add('hidden');
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const role = result.data.role || result.role;
+
+                    // Store auth data
+                    localStorage.setItem('token', result.data.token);
+                    localStorage.setItem('role', role);
+                    localStorage.setItem('email', result.data.email);
+                    localStorage.setItem('name', result.data.name || '');
+
+                    // Route based on role
+                    if (role === 'admin') {
+                        localStorage.setItem('adminToken', result.data.token);
+                        localStorage.setItem('adminUser', JSON.stringify(result.data));
+                        window.location.href = 'admin/dashboard.html';
+                    } else {
+                        window.location.href = 'user/dashboard.html';
+                    }
+                } else {
+                    showStatus(result.message || 'Invalid credentials', 'error');
+                    btn.disabled = false;
+                    loader.classList.add('hidden');
+                }
+            } catch (err) {
+                showStatus('An error occurred. Please try again.', 'error');
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        // ==================== SIGNUP HANDLER ====================
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('signupBtn');
+            const loader = btn.querySelector('.btn-loader');
+
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showStatus('Passwords do not match', 'error');
+                return;
+            }
+
+            // reCAPTCHA check
+            const recaptchaResponse = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
+            if (!recaptchaResponse) {
+                showStatus('Please complete the reCAPTCHA verification.', 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+            document.getElementById('statusMsg').classList.add('hidden');
+
+            try {
+                const response = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, confirmPassword, recaptchaToken: recaptchaResponse })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showStatus('Account created successfully! Redirecting to login...', 'success');
+                    document.getElementById('signupForm').reset();
+                    if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+                    setTimeout(() => switchTab('login'), 2000);
+                } else {
+                    showStatus(result.message || 'Signup failed', 'error');
+                }
+            } catch (err) {
+                showStatus('An error occurred. Please try again.', 'error');
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        // ==================== FORGOT PASSWORD ====================
+        document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value;
+            const btn = document.getElementById('forgotBtn');
+            const loader = btn.querySelector('.btn-loader');
+
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+            hideStatus();
+
+            try {
+                // Add cache-busting to the URL
+                const response = await fetch(`/api/auth/forgot-password?t=${Date.now()}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showStatus('OTP sent to your email. Check your inbox.', 'success');
+                    // Hide forgot form and show reset form
+                    document.getElementById('forgotForm').classList.remove('active');
+                    document.getElementById('resetForm').classList.add('active');
+                    document.getElementById('formSubtitle').textContent = 'Enter verification code';
+                } else {
+                    showStatus(result.message || `Error: ${response.status}`, 'error');
+                }
+            } catch (err) {
+                console.error('Forgot PW Fetch Error:', err);
+                showStatus(`Network Error: ${err.message}. Please check your connection.`, 'error');
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        // ==================== RESET PASSWORD (Final Submit) ====================
+        document.getElementById('resetForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value; // Use email from forgot form
+            const otp = document.getElementById('resetOtp').value;
+            const newPassword = document.getElementById('resetPassword').value;
+            const confirmPassword = document.getElementById('resetConfirmPassword').value;
+            const btn = document.getElementById('resetSubmitBtn');
+            const loader = btn.querySelector('.btn-loader');
+
+            if (newPassword !== confirmPassword) {
+                showStatus('Passwords do not match', 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+            hideStatus();
+
+            try {
+                const response = await fetch('/api/auth/reset-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, otp, newPassword, confirmPassword })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showStatus('Password updated successfully! Redirecting to login...', 'success');
+                    setTimeout(() => showLoginForm(), 3000);
+                } else {
+                    showStatus(result.message || 'Error occurred', 'error');
+                }
+            } catch (err) {
+                showStatus('Network error. Please try again.', 'error');
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        // ==================== AGGRESSIVE FORM RESET ====================
+        // Clears values and placeholders to prevent any credential persistence after logout
+        const resetPage = () => {
+            // Small timeout ensures we run after browser's native autocomplete/restore logic
+            setTimeout(() => {
+                document.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = false);
+                document.querySelectorAll('.btn-loader').forEach(l => l.classList.add('hidden'));
+                
+                document.querySelectorAll('input').forEach(input => {
+                    input.value = '';
+                    // Forcefully remove placeholder if user feels it looks like their credentials
+                    input.placeholder = ''; 
+                    // Remove any browser-stored autocomplete
+                    input.setAttribute('autocomplete', 'off');
+                });
+                
+                // Clear any status messages
+                const statusMsg = document.getElementById('statusMsg');
+                if (statusMsg) statusMsg.classList.add('hidden');
+
+                // Return to login default state
+                showLoginForm();
+            }, 50);
+        };
+
+        // Run on all possible page load/restore events
+        resetPage();
+        window.addEventListener('pageshow', resetPage);
+        window.addEventListener('load', resetPage);
+
+        // ==================== AUTO-REDIRECT IF ALREADY LOGGED IN ====================
+        const existingRole = localStorage.getItem('role');
+        const existingToken = localStorage.getItem('token') || localStorage.getItem('adminToken');
+        if (existingRole && existingToken) {
+            if (existingRole === 'admin') window.location.href = 'admin/dashboard.html';
+            else window.location.href = 'user/dashboard.html';
+        }
+
+        // ==================== URL TAB SWITCHING ====================
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('tab') === 'signup') {
+            switchTab('signup');
+        }
+    </script>
+</body>
+</html>

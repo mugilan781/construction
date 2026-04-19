@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions — InfraNest</title>
+  <meta name="description" content="Find answers to common questions about our services, process, pricing, and project execution.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Typography & Spacing Options for FAQ */
+    .text-center { text-align: center; }
+    .text-center .section-subtitle { display: block; }
+    .text-center .section-title::after {
+      content: ''; display: block; width: 60px; height: 3px;
+      background: var(--accent); margin: 12px auto 0; border-radius: 2px;
+    }
+    
+    /* FAQ Layout */
+    .faq-container { 
+      display: flex; 
+      gap: 50px; 
+      align-items: flex-start; 
+      max-width: 1200px; 
+      margin: 0 auto; 
+    }
+    .faq-sidebar { 
+      flex: 0 0 280px; 
+      position: sticky; 
+      top: 120px; 
+    }
+    .faq-content { 
+      flex: 1; 
+      min-width: 0; /* Prevents overflow in flex child */
+    }
+
+    /* FAQ Sidebar Categories */
+    .faq-category-btn {
+      display: block; 
+      width: 100%; 
+      text-align: left; 
+      padding: 16px 24px;
+      background: var(--white); 
+      border: 1px solid rgba(0,0,0,0.06); border-left: 4px solid transparent;
+      border-radius: var(--radius-md); 
+      margin-bottom: 12px; 
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600; 
+      font-size: 0.95rem;
+      color: var(--text-primary); 
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .faq-category-btn:hover {
+      border-color: rgba(201,169,110,0.3);
+      box-shadow: var(--shadow-sm);
+      transform: translateX(4px);
+    }
+    .faq-category-btn.active {
+      background: var(--primary); 
+      color: var(--white); 
+      border-left-color: var(--accent);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+      transform: translateX(4px);
+    }
+
+    /* FAQ Sections */
+    .faq-category-section { display: none; animation: fadeInFAQ 0.5s ease; }
+    .faq-category-section.active { display: block; }
+
+    @keyframes fadeInFAQ {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .faq-category-title {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Accordion Item */
+    .accordion-item {
+      background: var(--white); 
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius-md); 
+      margin-bottom: 16px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02); 
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .accordion-item:hover { 
+      box-shadow: var(--shadow-md); 
+      border-color: rgba(201,169,110,0.4); 
+    }
+    .accordion-item.active {
+      border-color: var(--accent);
+    }
+
+    .accordion-header {
+      padding: 22px 25px; 
+      width: 100%; 
+      text-align: left; 
+      background: none; 
+      border: none;
+      font-family: inherit;
+      font-weight: 600; 
+      font-size: 1.05rem; 
+      color: var(--primary); 
+      cursor: pointer;
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      transition: all 0.3s ease;
+      line-height: 1.4;
+    }
+    .accordion-header:hover { color: var(--accent); }
+    .accordion-header.active { color: var(--accent); }
+    
+    .accordion-icon {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15px;
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.3s ease, color 0.3s ease;
+      font-size: 0.8rem;
+    }
+    .accordion-header.active .accordion-icon { 
+      transform: rotate(180deg); 
+      background: var(--accent);
+      color: var(--white);
+    }
+    
+    .accordion-body {
+      max-height: 0; 
+      overflow: hidden; 
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #fafafa;
+    }
+    .accordion-body-inner { 
+      padding: 0 25px 25px 25px; 
+      color: var(--text-secondary); 
+      line-height: 1.7; 
+      font-size: 0.95rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    }
+    .accordion-header.active + .accordion-body .accordion-body-inner {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width: 900px) {
+      .faq-container { flex-direction: column; gap: 30px; }
+      .faq-sidebar { 
+        flex: 1; 
+        width: 100%; 
+        position: relative; 
+        top: 0; 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 10px; 
+      }
+      .faq-category-btn { 
+        width: auto; 
+        margin-bottom: 0; 
+        flex: 1; 
+        text-align: center; 
+        padding: 12px 15px; 
+        border-left: 1px solid rgba(0,0,0,0.06);
+        border-bottom: 4px solid transparent;
+      }
+      .faq-category-btn.active {
+        border-left-color: var(--primary);
+        border-bottom-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .faq-category-btn:hover {
+        transform: translateY(-2px);
+      }
+    }
+    @media(max-width: 600px) {
+      .faq-category-btn { flex: 0 0 calc(50% - 5px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">Infra<span style="color: var(--accent);">Nest</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="contact.html?tab=quote" class="nav-cta">Get a Quote</a>
+      <div class="user-menu">
+        <div class="user-icon" onclick="toggleUserMenu()"><i class="fas fa-user"></i></div>
+        <div class="user-dropdown" id="userDropdown">
+          <!-- Populated by updateUserMenu() in main.js -->
+        </div>
+      </div>
+      
+    </div>
+    <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE HEADER REGION -->
+  <div class="page-header">
+    <h1>Frequently Asked Questions</h1>
+    <p class="page-header-desc">Find answers to common questions about our services, process, pricing, and project execution.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <span>FAQ</span></div>
+  </div>
+
+  <!-- FAQ MAIN CONTENT -->
+  <section class="section section-light" style="padding-top: 80px; padding-bottom: 100px;">
+    <div class="faq-container">
+      
+      <!-- Left Sidebar: Categories List -->
+      <div class="faq-sidebar fade-up">
+        <button class="faq-category-btn active" onclick="switchFaqCategory('faq-general', this)">General</button>
+        <button class="faq-category-btn" onclick="switchFaqCategory('faq-process', this)">Our Process</button>
+        <button class="faq-category-btn" onclick="switchFaqCategory('faq-pricing', this)">Pricing & Payment</button>
+        <button class="faq-category-btn" onclick="switchFaqCategory('faq-project', this)">Project Details</button>
+        <button class="faq-category-btn" onclick="switchFaqCategory('faq-materials', this)">Materials & Construction</button>
+      </div>
+
+      <!-- Right Content: Accordions -->
+      <div class="faq-content">
+
+        <!-- GENERAL -->
+        <div id="faq-general" class="faq-category-section active">
+          <h2 class="faq-category-title">General Questions</h2>
+          
+          <div class="accordion-item fade-up" style="animation-delay: 0.1s;">
+            <button class="accordion-header">
+              What services does InfraNest offer?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                InfraNest offers comprehensive construction services including residential and luxury home building, large-scale commercial infrastructures, industrial facilities, interior design, renovation, and complete architecture planning from concept to completion.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item fade-up" style="animation-delay: 0.2s;">
+            <button class="accordion-header">
+              Where are you located?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Our central headquarters are based in Chennai, Tamil Nadu. However, we undertake and execute major residential and commercial projects across the nation, supported by our robust network of engineers and suppliers.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item fade-up" style="animation-delay: 0.3s;">
+            <button class="accordion-header">
+              Do you handle both residential and commercial projects?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Yes, we have extensive experience and dedicated execution divisions for both high-end luxury residential properties and expansive commercial developments such as tech parks, corporate offices, and industrial warehouses.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item fade-up" style="animation-delay: 0.4s;">
+            <button class="accordion-header">
+              How can I get started with InfraNest?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                You can initiate your project by filling out the "Get a Quote" form on our website or contacting us directly via our phoneline or email. Our team will promptly arrange an initial consultation to thoroughly discuss your vision and requirements.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OUR PROCESS -->
+        <div id="faq-process" class="faq-category-section">
+          <h2 class="faq-category-title">Our Process</h2>
+          
+          <div class="accordion-item">
+            <button class="accordion-header">
+              What is your project workflow?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Our structured workflow encompasses five critical phases: Initial Consultation & Concept, Feasibility Analysis & Architectural Design, Compliance Approvals & Permitting, Active Construction & Execution, and finally, Handover & Lifecycle Support.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              How long does a typical project take?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Timelines vary based on scope and scale. A typical residential build may span 8 to 12 months, whereas comprehensive commercial complexes can take between 1.5 to 3 years. A detailed milestone schedule is provided during the detailed planning phase.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Will I be involved during the process?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Absolutely. Transparency is a core value. We utilize digital project management interfaces to keep you informed of real-time progress. Your input will be actively solicited for key structural approvals and design choices throughout the lifecycle.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Do you provide end-to-end solutions?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Yes, our turnkey delivery model covers the entire structural spectrum—from initial survey and architectural blueprints to core civil construction, final interior finishing, and smart systems integration. You work with one entity, eliminating multi-contractor friction.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRICING & PAYMENT -->
+        <div id="faq-pricing" class="faq-category-section">
+          <h2 class="faq-category-title">Pricing & Payment</h2>
+          
+          <div class="accordion-item">
+            <button class="accordion-header">
+              How is project cost estimated?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Costs are meticulously formulated considering the total square footage, targeted material quality standards, architectural complexity, and prevailing market rates for labor. We present a comprehensive, granular Bill of Quantities (BOQ) before securing any commitment.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Are there any hidden charges?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                No. We maintain strict financial integrity. Every known cost is documented in the final agreement. In the event of unforeseen requirements or client-requested changes, transparent cost adjustments are discussed, formalized, and approved strictly prior to execution.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              What payment methods do you accept?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                We accommodate all standard institutional methods including direct bank transfers (NEFT/RTGS), certified cheques, and applicable corporate payment protocols suitable for varying scales of commercial and residential invoicing.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Do you offer flexible payment plans?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Yes. Our payment structure is strictly tied to project milestones. Funding is released progressively as specific predefined construction phases (e.g., site excavation, slab casting, MEP installations) pass inspection and are successfully concluded.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT DETAILS -->
+        <div id="faq-project" class="faq-category-section">
+          <h2 class="faq-category-title">Project Details</h2>
+          
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Can you work with my existing design ideas?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Certainly. Our architectural collective is adept at taking preliminary sketches, conceptual mood boards, or pre-existing layout drafts and refining them into structurally viable, compliant, and highly detailed construction blueprints.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Do you handle approvals and permits?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Yes, our legal and compliance teams systematically handle the entire liaison process. This includes securing essential civic, environmental clearances, layout sanctions, and structural permits necessary to lawfully execute your build.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              What if I want to make changes during construction?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Modifications mid-construction are managed via a structured "Change Order" process. This ensures that the requested alterations are analyzed for structural feasibility, and budget/timeline impacts are clearly communicated and authorized before proceeding.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MATERIALS & CONSTRUCTION -->
+        <div id="faq-materials" class="faq-category-section">
+          <h2 class="faq-category-title">Materials & Construction</h2>
+          
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Do you use high-quality materials?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Material integrity is foundational to our brand value. We rigorously vet and procure premium-grade cement, TMT steel, and finishes exclusively from certified, top-tier institutional vendors, ensuring unmatched durability and finish.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Can I choose my own materials?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Yes, particularly concerning interior specifics such as flooring, fixtures, paint palettes, and stonework. Our designers offer expert comparative guidance regarding longevity and maintenance, but the ultimate aesthetic decision remains yours.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              Do you follow sustainable construction practices?
+              <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-body-inner">
+                Sustainability is deeply integrated into our methodology. We actively deploy green building techniques, maximize passive energy efficiency, mandate rigorous site waste management, and advocate for sustainable material options wherever structurally viable.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-dark" style="text-align:center; position:relative; overflow:hidden;">
+    <div style="position:absolute; inset:0; background: radial-gradient(circle at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 60%);"></div>
+    <div class="fade-up" style="position:relative; z-index:1;">
+      <h2 class="section-title text-center" style="color:var(--white);">Still Have Questions?</h2>
+      <p style="color:rgba(255,255,255,0.6); max-width:540px; margin:0 auto 36px; font-family:'Inter', sans-serif; line-height: 1.8;">Our team is here to guide you through every step of your project.</p>
+      <a href="contact.html" class="btn btn-primary" style="padding: 16px 42px; font-size: 0.95rem; box-shadow: 0 4px 20px rgba(201,169,110,0.25);">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <!-- Col 1: Logo & Social -->
+      <div class="footer-about">
+        <a href="index.html" class="footer-logo">Infra<span>Nest</span></a>
+        <p class="dynamic-about">Delivering premium construction solutions with unmatched precision, quality, and innovation since 2005.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <!-- Col 2: Quick Links -->
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+      <!-- Col 3: Services -->
+      <div class="footer-links">
+        <h4>Services</h4>
+        <a href="service-detail.html?service=construction">Construction</a>
+        <a href="service-detail.html?service=interior">Interior Design</a>
+        <a href="service-detail.html?service=renovation">Renovation</a>
+        <a href="service-detail.html?service=architecture">Architecture Planning</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      
+      <!-- Col 4: Contact Info -->
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt" style="margin-top:4px;"></i><span class="dynamic-address">123 Builder's Avenue, Chennai,<br>Tamil Nadu 600001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span class="dynamic-phone">+91 98765 43210</span></div>
+        <div class="footer-contact-item" style="margin-bottom:0;"><i class="fas fa-envelope"></i><span class="dynamic-email">info@infranest.com</span></div>
+      </div>
+      
+      <!-- Col 5: Newsletter -->
+      <div class="footer-newsletter">
+        <h4>Newsletter</h4>
+        <p style="font-size:0.875rem; margin-bottom:16px; color:rgba(255,255,255,0.65); line-height:1.6; text-align:left;">Subscribe for construction tips, project updates, and industry news.</p>
+        <form class="footer-newsletter-form" onsubmit="event.preventDefault()">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin: 0;">&copy; 2025 InfraNest. All rights reserved. Crafted with excellence.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer>
+  <a href="contact.html?tab=quote" class="floating-cta" title="Get a Quote"><i class="fas fa-paper-plane"></i></a>
+
+  <!-- REQUIRED SCRIPTS -->
+  <script src="js/main.js"></script>
+  
+  <!-- FAQ SPECIFIC SCRIPT -->
+  <script>
+    // Category Switching Logic
+    function switchFaqCategory(categoryId, btnElement) {
+      // Hide all category sections
+      document.querySelectorAll('.faq-category-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      // Remove active class from all buttons
+      document.querySelectorAll('.faq-category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show selected category section
+      document.getElementById(categoryId).classList.add('active');
+      // Set clicked button to active
+      btnElement.classList.add('active');
+
+      // Reset all accordions to closed when switching categories
+      document.querySelectorAll('.accordion-header').forEach(header => {
+        header.classList.remove('active');
+        const bodyContent = header.nextElementSibling;
+        bodyContent.style.maxHeight = null;
+        header.parentElement.classList.remove('active');
+      });
+    }
+
+    // Accordion Toggle Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const accordionHeaders = document.querySelectorAll('.accordion-header');
+      
+      accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+          const item = this.parentElement;
+          const body = this.nextElementSibling;
+          const isActive = this.classList.contains('active');
+
+          // Close all open accordions within the same category
+          const siblings = this.closest('.faq-category-section').querySelectorAll('.accordion-header');
+          siblings.forEach(siblingHeader => {
+            siblingHeader.classList.remove('active');
+            siblingHeader.parentElement.classList.remove('active');
+            siblingHeader.nextElementSibling.style.maxHeight = null;
+          });
+
+          // Toggle current
+          if (!isActive) {
+            this.classList.add('active');
+            item.classList.add('active');
+            body.style.maxHeight = body.scrollHeight + "px";
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

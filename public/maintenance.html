@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance — InfraNest</title>
+  <meta name="description" content="Our website is currently undergoing scheduled updates to serve you better. We'll be back shortly.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Navbar Fix - Ensures it's solid over the gradient background */
+    .navbar { 
+      background: rgba(15, 31, 53, 0.94) !important; 
+      backdrop-filter: blur(18px); 
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.05); 
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2) !important;
+    }
+
+    /* Maintenance specific layout */
+    .maintenance-wrapper {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, #0a1428 100%);
+      width: 100%;
+      min-height: calc(100vh - 68px); /* offset the navbar height */
+      margin-top: 68px; 
+      display: flex;
+      overflow: hidden;
+      animation: fadeInMain 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes fadeInMain {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Left Section (Content) */
+    .m-left {
+      flex: 0 0 55%;
+      padding: 0 8%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .m-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(201,169,110,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .m-label {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: var(--accent);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      background: rgba(201,169,110,0.1);
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(201,169,110,0.2);
+    }
+
+    .m-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      color: var(--white);
+      margin-bottom: 24px;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+
+    .m-desc {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 540px;
+    }
+
+    .m-contact {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 45px;
+    }
+
+    .m-contact a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      border-bottom: 1px solid transparent;
+    }
+
+    .m-contact a:hover {
+      color: var(--accent-light);
+      border-color: var(--accent-light);
+    }
+
+    /* Form Design */
+    .m-form {
+      display: flex;
+      max-width: 450px;
+      position: relative;
+    }
+
+    .m-input {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 18px 24px;
+      border-radius: var(--radius-full) 0 0 var(--radius-full);
+      outline: none;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .m-input::placeholder {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .m-input:focus {
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 15px rgba(201,169,110,0.15);
+    }
+
+    .m-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: var(--primary-dark);
+      padding: 0 32px;
+      border: none;
+      border-radius: 0 var(--radius-full) var(--radius-full) 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-transform: uppercase;
+    }
+
+    .m-btn:hover {
+      background: var(--accent-light);
+      box-shadow: 0 6px 20px rgba(201,169,110,0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Right Section (Premium Visual Layer) */
+    .m-right {
+      flex: 0 0 45%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    /* Blueprint Grid Background */
+    .m-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(201,169,110,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,169,110,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: center;
+      z-index: 1;
+    }
+
+    /* Radial Backlight / Glow */
+    .m-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(201,169,110,0.18) 0%, transparent 65%);
+      z-index: 2;
+    }
+
+    /* Structural Graphic Container */
+    .diagram-container {
+      position: relative;
+      width: 400px;
+      height: 480px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: floatGraphic 6s ease-in-out infinite;
+    }
+
+    @keyframes floatGraphic {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* The glowing wireframe UI overlay */
+    .diagram-base {
+      position: absolute;
+      bottom: 20%;
+      width: 100%;
+      height: 1px;
+      background: rgba(201,169,110,0.5);
+      box-shadow: 0 0 10px rgba(201,169,110,0.4);
+    }
+    
+    .diagram-icon {
+      font-size: 8.5rem;
+      color: var(--accent);
+      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+      margin-bottom: 20px;
+    }
+
+    .diagram-measurements {
+      position: absolute;
+      top: 15%;
+      right: 15%;
+      border: 1px dashed rgba(201,169,110,0.4);
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(201,169,110,0.8);
+      letter-spacing: 2px;
+      border-radius: 4px;
+    }
+
+    .diagram-measurements::before,
+    .diagram-measurements::after {
+      content: '';
+      position: absolute;
+      background: rgba(201,169,110,0.5);
+    }
+    .diagram-measurements::before { width: 140px; height: 1px; }
+    .diagram-measurements::after { height: 140px; width: 1px; }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .m-title { font-size: 3.2rem; }
+      .diagram-container { transform: scale(0.85); }
+    }
+
+    @media (max-width: 900px) {
+      .maintenance-wrapper { flex-direction: column; }
+      
+      .m-left {
+        flex: unset;
+        width: 100%;
+        padding: 80px 8%;
+        text-align: center;
+        align-items: center;
+      }
+      
+      .m-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .m-form {
+        width: 100%;
+      }
+      
+      .m-right {
+        flex: unset;
+        width: 100%;
+        min-height: 450px;
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.04);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .m-left { padding: 60px 20px; }
+      .m-title { font-size: 2.5rem; }
+      .m-desc { font-size: 0.95rem; }
+      
+      .m-form { flex-direction: column; border-radius: var(--radius-sm); overflow: hidden; background: transparent; }
+      .m-input { border-radius: var(--radius-sm); margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2); }
+      .m-btn { border-radius: var(--radius-sm); padding: 18px 24px; }
+      
+      .diagram-container { transform: scale(0.65); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">Infra<span style="color: var(--accent);">Nest</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="contact.html?tab=quote" class="nav-cta">Get a Quote</a>
+      <div class="user-menu">
+        <div class="user-icon" onclick="toggleUserMenu()"><i class="fas fa-user"></i></div>
+        <div class="user-dropdown" id="userDropdown">
+          <!-- Populated by updateUserMenu() in main.js -->
+        </div>
+      </div>
+      
+    </div>
+    <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- MAINTENANCE SPLIT SECTION -->
+  <div class="maintenance-wrapper">
+    
+    <!-- LEFT CONTENT SECTION -->
+    <div class="m-left">
+      <div class="m-label">We'll be back soon</div>
+      <h1 class="m-title">We’re Improving Your Experience</h1>
+      <p class="m-desc">Our website is currently undergoing scheduled updates to serve you better. We’ll be back shortly with enhanced features and improved performance.</p>
+      
+      <p class="m-contact">
+        In the meantime, reach us at 
+        <a href="mailto:info@infranest.com"><i class="fas fa-envelope" style="margin-right: 6px;"></i>info@infranest.com</a>
+      </p>
+
+      <form class="m-form" onsubmit="event.preventDefault()">
+        <input type="email" class="m-input" placeholder="Enter your email" required>
+        <button type="submit" class="m-btn">Notify Me</button>
+      </form>
+    </div>
+
+    <!-- RIGHT VISUAL SECTION (Architectural Themed) -->
+    <div class="m-right">
+      <!-- Floating Architectural Graphic -->
+      <div class="diagram-container">
+        <!-- Central Crane/Building Silhouette -->
+        <i class="fas fa-city diagram-icon"></i>
+        <!-- Blueprint Schematic Measurements -->
+        <div class="diagram-measurements">PHASE II</div>
+        <!-- glowing baseline -->
+        <div class="diagram-base"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <!-- Col 1: Logo & Social -->
+      <div class="footer-about">
+        <a href="index.html" class="footer-logo">Infra<span>Nest</span></a>
+        <p class="dynamic-about">Delivering premium construction solutions with unmatched precision, quality, and innovation since 2005.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <!-- Col 2: Quick Links -->
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+      <!-- Col 3: Services -->
+      <div class="footer-links">
+        <h4>Services</h4>
+        <a href="service-detail.html?service=construction">Construction</a>
+        <a href="service-detail.html?service=interior">Interior Design</a>
+        <a href="service-detail.html?service=renovation">Renovation</a>
+        <a href="service-detail.html?service=architecture">Architecture Planning</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      
+      <!-- Col 4: Contact Info -->
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt" style="margin-top:4px;"></i><span class="dynamic-address">123 Builder's Avenue, Chennai,<br>Tamil Nadu 600001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span class="dynamic-phone">+91 98765 43210</span></div>
+        <div class="footer-contact-item" style="margin-bottom:0;"><i class="fas fa-envelope"></i><span class="dynamic-email">info@infranest.com</span></div>
+      </div>
+      
+      <!-- Col 5: Newsletter -->
+      <div class="footer-newsletter">
+        <h4>Newsletter</h4>
+        <p style="font-size:0.875rem; margin-bottom:16px; color:rgba(255,255,255,0.65); line-height:1.6; text-align:left;">Subscribe for construction tips, project updates, and industry news.</p>
+        <form class="footer-newsletter-form" onsubmit="event.preventDefault()">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin: 0;">&copy; 2025 InfraNest. All rights reserved. Crafted with excellence.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer>
+  <a href="contact.html?tab=quote" class="floating-cta" title="Get a Quote"><i class="fas fa-paper-plane"></i></a>
+
+  <!-- REQUIRED SCRIPTS -->
+  <script src="js/main.js"></script>
+</body>
+</html>

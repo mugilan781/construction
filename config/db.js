@@ -1,5 +1,4 @@
 const mysql = require('mysql2');
-require('dotenv').config();
 
 const dbConfig = process.env.DATABASE_URL ? process.env.DATABASE_URL : {
   host: process.env.DB_HOST,

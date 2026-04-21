@@ -48,16 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Global image load handler to prevent flash
   document.querySelectorAll("img").forEach(img => {
-    if (img.complete) {
-      img.classList.add("loaded");
-    } else {
-      img.addEventListener("load", () => {
-        img.classList.add("loaded");
-      });
-      img.addEventListener("error", () => {
-        img.style.visibility = "visible";
-      });
+    const realSrc = img.getAttribute("src");
+    
+    if (realSrc) {
+      // Clear image BEFORE browser paints
+      img.setAttribute("src", "");
+
+      // Restore source after slight delay
+      setTimeout(() => {
+        img.setAttribute("src", realSrc);
+      }, 50);
     }
+
+    img.addEventListener("load", () => {
+      img.classList.add("loaded");
+    });
   });
 
   // Close mobile menu on link click

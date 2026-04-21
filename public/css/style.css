@@ -82,12 +82,13 @@ img {
   width: 100%;
   height: auto;
   max-width: 100%;
-  background-color: var(--off-white);
-  visibility: hidden;
+  background-color: #f3f3f3;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 img.loaded {
-  visibility: visible;
+  opacity: 1;
 }
 
 ul {

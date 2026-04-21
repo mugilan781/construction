@@ -39,6 +39,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // Trigger main content fade-in
   document.querySelector(".main-content")?.classList.add("loaded");
 
+  // Global image load handler to prevent flash
+  document.querySelectorAll("img").forEach(img => {
+    if (img.complete) {
+      img.classList.add("loaded");
+    } else {
+      img.addEventListener("load", () => {
+        img.classList.add("loaded");
+      });
+      img.addEventListener("error", () => {
+        img.style.opacity = "1";
+      });
+    }
+  });
+
   // Close mobile menu on link click
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {

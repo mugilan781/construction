@@ -46,17 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Trigger main content fade-in
   document.querySelector(".main-content")?.classList.add("loaded");
 
-  // Global image load handler to prevent flash
+  // Global image load handler to prevent flash and enforce cache busting
+  const version = "v=" + Date.now();
   document.querySelectorAll("img").forEach(img => {
     const realSrc = img.getAttribute("src");
     
     if (realSrc) {
+      let finalSrc = realSrc;
+      // Add versioning if not present
+      if (!finalSrc.includes("?v=")) {
+        finalSrc = finalSrc + (finalSrc.includes("?") ? "&" : "?") + version;
+      }
+      
       // Clear image BEFORE browser paints
       img.setAttribute("src", "");
 
       // Restore source after slight delay
       setTimeout(() => {
-        img.setAttribute("src", realSrc);
+        img.setAttribute("src", finalSrc);
       }, 50);
     }
 

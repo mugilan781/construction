@@ -54,8 +54,20 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/leads', apiLimiter, leadRoutes);
 
-// Static files
-app.use(express.static('public'));
+// Middlewares for Performance
+const compression = require('compression');
+app.use(compression()); // Compress all responses to optimize payload
+
+// Static files with Cache-Control headers for optimizing image/asset loading times
+app.use(express.static('public', {
+  maxAge: '30d', // Cache static assets like images for 30 days
+  setHeaders: (res, path) => {
+    if (path.endsWith('.html')) {
+      // Don't cache HTML to ensure fresh content
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+  }
+}));
 
 // Additional Routes
 // Additional Routes

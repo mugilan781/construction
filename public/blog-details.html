@@ -52,7 +52,7 @@
         <span id="blog-author"><i class="fas fa-user"></i> —</span>
         <span><i class="fas fa-tag"></i> <span id="blog-category">—</span></span>
       </div>
-      <img id="blog-image" src="" alt="" class="blog-article-img">
+      <img id="blog-image" src="" alt="" class="blog-article-img" loading="lazy">
       <div id="blog-content"></div>
       <a href="blog.html" class="blog-back-btn"><i class="fas fa-arrow-left"></i> Back to Blog</a>
     </div>
@@ -168,7 +168,7 @@
         document.getElementById('blog-date').innerHTML = '<i class="far fa-calendar-alt"></i> ' + formattedDate;
         document.getElementById('blog-author').innerHTML = '<i class="fas fa-user"></i> ' + (blog.author || 'InfraNest Editorial');
         document.getElementById('blog-category').textContent = blog.category || 'Updates';
-        document.getElementById('blog-image').src = blog.image_url || 'images/project-residential.png';
+        document.getElementById('blog-image').src = blog.image_url || 'images/project-residential.webp';
         document.getElementById('blog-image').alt = blog.title;
         document.getElementById('blog-content').innerHTML = blog.content;
       } catch (err) {

@@ -72,13 +72,13 @@
             result.data.forEach((service, i) => {
               // Map DB services to an image for UI
               const imgMap = {
-                'construction': 'images/service-construction.png',
-                'interior design': 'images/interior-livingroom.png',
-                'renovation': 'images/project-before.png',
-                'architecture planning': 'images/about-team.png'
+                'construction': 'images/service-construction.webp',
+                'interior design': 'images/interior-livingroom.webp',
+                'renovation': 'images/project-before.webp',
+                'architecture planning': 'images/about-team.webp'
               };
               const titleLower = service.name ? service.name.toLowerCase() : '';
-              let imgSrc = 'images/service-construction.png';
+              let imgSrc = 'images/service-construction.webp';
               
               for (const [key, val] of Object.entries(imgMap)) {
                 if (titleLower.includes(key)) {
@@ -93,7 +93,7 @@
               const cardHTML = `
                 <a href="service-detail.html?id=${service.id}" class="service-card" style="text-align:left; border-radius: var(--radius-lg); animation-delay: ${delay}s; text-decoration: none; color: inherit; display: block;">
                   <div class="service-img-wrapper">
-                    <img src="${imgSrc}" alt="${service.name}" class="service-img">
+                    <img src="${imgSrc}" alt="${service.name}" class="service-img" loading="lazy">
                   </div>
                   <div class="service-card-content">
                     <div style="display:flex; align-items:center; gap:20px; margin-bottom:24px;">

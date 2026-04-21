@@ -68,7 +68,7 @@
             grid.innerHTML = '';
             
             result.data.forEach((blog, i) => {
-              const imageStr = blog.image_url || 'images/project-residential.png';
+              const imageStr = blog.image_url || 'images/project-residential.webp';
               
               // Format date properly
               let formattedDate = 'Recent';
@@ -83,7 +83,7 @@
               const cardHTML = `
                 <a href="blog-details.html?id=${blog.id}" class="card" style="animation-delay: ${i * 0.1}s;">
                   <div class="card-img-wrapper">
-                    <img src="${imageStr}" alt="${blog.title}" class="blog-card-img">
+                    <img src="${imageStr}" alt="${blog.title}" class="blog-card-img" loading="lazy">
                     <div class="card-overlay"><span class="btn btn-white">Read Full Article</span></div>
                   </div>
                   <div class="card-body">

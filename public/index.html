@@ -7,6 +7,7 @@
   <title>InfraNest — Premium Construction Solutions</title>
   <meta name="description"
     content="InfraNest delivers world-class construction, renovation, and architectural planning services. Building your dream projects with precision and excellence.">
+  <link rel="preload" as="image" href="images/hero-bg.webp">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -39,7 +40,7 @@
 
   <!-- ========== HERO ========== -->
   <section class="hero" id="hero">
-    <div class="hero-bg" style="background-image: url('images/hero-bg.png')"></div>
+    <div class="hero-bg" style="background-image: url('images/hero-bg.webp')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-badge"><i class="fas fa-hard-hat"></i> Trusted Since 2005</div>
@@ -527,7 +528,7 @@
           container.innerHTML = featuredProjects.map(p => `
             <a href="project-detail.html?id=${p.id}" class="card">
               <div class="card-img-wrapper">
-                <img src="${p.image_url || 'images/project-commercial.png'}" alt="${p.title}" class="card-img">
+                <img src="${p.image_url || 'images/project-commercial.webp'}" alt="${p.title}" class="card-img" loading="lazy">
                 <div class="card-overlay"><span class="btn btn-white">View Details</span></div>
               </div>
               <div class="card-body">

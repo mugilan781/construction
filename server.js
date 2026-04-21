@@ -60,11 +60,12 @@ app.use(compression()); // Compress all responses to optimize payload
 
 // Static files with Cache-Control headers for optimizing image/asset loading times
 app.use(express.static('public', {
-  maxAge: '30d', // Cache static assets like images for 30 days
   setHeaders: (res, path) => {
     if (path.endsWith('.html')) {
       // Don't cache HTML to ensure fresh content
-      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Cache-Control', 'no-store');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
     }
   }
 }));

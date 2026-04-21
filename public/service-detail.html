@@ -63,6 +63,7 @@
     </div>
     <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </nav>
+  <div class="main-content">
 
   <div class="page-header">
     <h1 id="serviceTitle">Service Details</h1>
@@ -73,7 +74,7 @@
   <section class="section">
       <!-- MAIN IMAGE & OVERVIEW -->
       <div class="fade-up" style="margin-bottom: 48px;">
-        <img id="serviceMainImage" src="images/service-construction.webp" alt="Service Image" style="width:100%; height:460px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:var(--shadow-md);" fetchpriority="high">
+        <img decoding="async" id="serviceMainImage" src="images/service-construction.webp" alt="Service Image" style="width:100%; height:460px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:var(--shadow-md);" fetchpriority="high">
       </div>
       <div class="fade-up">
         <div id="serviceSubtitle" class="section-subtitle">Excellence in Every Detail</div>
@@ -116,8 +117,8 @@
           <div class="methodology-visual fade-left" style="animation-delay: 0.3s;">
             <div class="stacked-images">
               <div class="main-img-overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.1), transparent); border-radius: 16px; z-index: 2; pointer-events: none;"></div>
-              <img id="methodologyImgMain" src="images/project-steelplant.webp" alt="Methodology Main" class="main-img" loading="lazy">
-              <img id="methodologyImgSub" src="images/project-industrial.webp" alt="Methodology Detail" class="sub-img float-anim" loading="lazy">
+              <img decoding="async" id="methodologyImgMain" src="images/project-steelplant.webp" alt="Methodology Main" class="main-img" loading="lazy">
+              <img decoding="async" id="methodologyImgSub" src="images/project-industrial.webp" alt="Methodology Detail" class="sub-img float-anim" loading="lazy">
             </div>
           </div>
         </div>
@@ -161,6 +162,7 @@
 
   <!-- FOOTER -->
           <!-- ========== FOOTER ========== -->
+  </div>
   <footer class="footer">
     <div class="footer-grid">
       <!-- Col 1: Logo & Social -->

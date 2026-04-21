@@ -37,6 +37,7 @@
     </div>
     <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </nav>
+  <div class="main-content">
 
   <!-- ========== HERO ========== -->
   <section class="hero" id="hero">
@@ -341,6 +342,7 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
+  </div>
   <footer class="footer">
     <div class="footer-grid">
       <!-- Col 1: Logo & Social -->
@@ -528,7 +530,7 @@
           container.innerHTML = featuredProjects.map(p => `
             <a href="project-detail.html?id=${p.id}" class="card">
               <div class="card-img-wrapper">
-                <img src="${p.image_url || 'images/project-commercial.webp'}" alt="${p.title}" class="card-img" loading="lazy">
+                <img decoding="async" src="${p.image_url || 'images/project-commercial.webp'}" alt="${p.title}" class="card-img" loading="lazy">
                 <div class="card-overlay"><span class="btn btn-white">View Details</span></div>
               </div>
               <div class="card-body">

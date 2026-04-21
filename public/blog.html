@@ -33,6 +33,7 @@
     </div>
     <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </nav>
+  <div class="main-content">
 
   <div class="page-header">
     <h1>Our Blog</h1>
@@ -83,7 +84,7 @@
               const cardHTML = `
                 <a href="blog-details.html?id=${blog.id}" class="card" style="animation-delay: ${i * 0.1}s;">
                   <div class="card-img-wrapper">
-                    <img src="${imageStr}" alt="${blog.title}" class="blog-card-img" loading="lazy">
+                    <img decoding="async" src="${imageStr}" alt="${blog.title}" class="blog-card-img" loading="lazy">
                     <div class="card-overlay"><span class="btn btn-white">Read Full Article</span></div>
                   </div>
                   <div class="card-body">
@@ -120,6 +121,7 @@
 
   <!-- FOOTER -->
           <!-- ========== FOOTER ========== -->
+  </div>
   <footer class="footer">
     <div class="footer-grid">
       <!-- Col 1: Logo & Social -->

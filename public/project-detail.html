@@ -405,6 +405,7 @@
     </div>
     <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </nav>
+  <div class="main-content">
 
   <div class="page-header">
     <h1 id="projectTitle">Project Showcase</h1>
@@ -418,7 +419,7 @@
     <div class="grid-2" style="grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: flex-start;">
       <!-- MAIN CONTENT -->
       <div class="fade-up">
-        <img id="mainProjectImg" src="images/project-residential.webp" alt="Project Hero"
+        <img decoding="async" id="mainProjectImg" src="images/project-residential.webp" alt="Project Hero"
           style="width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius-lg); margin-bottom:40px; box-shadow:var(--shadow-lg);" fetchpriority="high">
 
         <div class="section-subtitle">The Masterpiece</div>
@@ -490,27 +491,27 @@
     </div>
     <div class="project-gallery fade-up">
       <div class="gallery-item">
-        <img src="images/project-villa.webp" alt="Exterior View" class="gallery-img" loading="lazy">
+        <img decoding="async" src="images/project-villa.webp" alt="Exterior View" class="gallery-img" loading="lazy">
         <div class="gallery-label">Exterior View</div>
       </div>
       <div class="gallery-item">
-        <img src="images/project-corporate.webp" alt="Facade Detail" class="gallery-img" loading="lazy">
+        <img decoding="async" src="images/project-corporate.webp" alt="Facade Detail" class="gallery-img" loading="lazy">
         <div class="gallery-label">Facade Detail</div>
       </div>
       <div class="gallery-item">
-        <img src="images/project-apartments.webp" alt="Aerial Perspective" class="gallery-img" loading="lazy">
+        <img decoding="async" src="images/project-apartments.webp" alt="Aerial Perspective" class="gallery-img" loading="lazy">
         <div class="gallery-label">Aerial Perspective</div>
       </div>
       <div class="gallery-item">
-        <img src="images/project-techpark.webp" alt="Lobby Entrance" class="gallery-img" loading="lazy">
+        <img decoding="async" src="images/project-techpark.webp" alt="Lobby Entrance" class="gallery-img" loading="lazy">
         <div class="gallery-label">Lobby Entrance</div>
       </div>
       <div class="gallery-item">
-        <img src="images/project-commercial.webp" alt="Interior Space" class="gallery-img" loading="lazy">
+        <img decoding="async" src="images/project-commercial.webp" alt="Interior Space" class="gallery-img" loading="lazy">
         <div class="gallery-label">Interior Space</div>
       </div>
       <div class="gallery-item">
-        <img src="images/project-steelplant.webp" alt="Structural Framework" class="gallery-img" loading="lazy">
+        <img decoding="async" src="images/project-steelplant.webp" alt="Structural Framework" class="gallery-img" loading="lazy">
         <div class="gallery-label">Structural Framework</div>
       </div>
     </div>
@@ -545,12 +546,12 @@
     </div>
     <div class="before-after-grid fade-up">
       <div class="ba-item">
-        <img id="beforeImg" src="images/project-before.webp" alt="Before Construction" loading="lazy">
+        <img decoding="async" id="beforeImg" src="images/project-before.webp" alt="Before Construction" loading="lazy">
         <div class="ba-badge">Before</div>
         <div class="ba-divider"></div>
       </div>
       <div class="ba-item">
-        <img id="afterImg" src="images/project-after.webp" alt="After Construction" loading="lazy">
+        <img decoding="async" id="afterImg" src="images/project-after.webp" alt="After Construction" loading="lazy">
         <div class="ba-badge after">After</div>
       </div>
     </div>
@@ -567,7 +568,7 @@
       <div style="text-align: center;">
         <div
           style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img src="images/project-before.webp" alt="Phase 1"
+          <img decoding="async" src="images/project-before.webp" alt="Phase 1"
             style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
         </div>
@@ -577,7 +578,7 @@
       <div style="text-align: center;">
         <div
           style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img src="images/project-industrial.webp" alt="Phase 2"
+          <img decoding="async" src="images/project-industrial.webp" alt="Phase 2"
             style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: transform 0.4s ease;"
             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
         </div>
@@ -587,7 +588,7 @@
       <div style="text-align: center;">
         <div
           style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img src="images/project-commercial.webp" alt="Phase 3"
+          <img decoding="async" src="images/project-commercial.webp" alt="Phase 3"
             style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(10%); transition: transform 0.4s ease;"
             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
         </div>
@@ -597,7 +598,7 @@
       <div style="text-align: center;">
         <div
           style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img id="progressFinalImg" src="images/project-residential.webp" alt="Phase 4"
+          <img decoding="async" id="progressFinalImg" src="images/project-residential.webp" alt="Phase 4"
             style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
             onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
         </div>
@@ -656,6 +657,7 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
+  </div>
   <footer class="footer">
     <div class="footer-grid">
       <!-- Col 1: Logo & Social -->
@@ -841,7 +843,7 @@
             let finalSrc = img.image_url;
             return `
             <div class="gallery-item fade-up">
-              <img src="${finalSrc}" alt="Project View" class="gallery-img" onerror="this.src='images/project-default.webp'" loading="lazy">
+              <img decoding="async" src="${finalSrc}" alt="Project View" class="gallery-img" onerror="this.src='images/project-default.webp'" loading="lazy">
               <div class="gallery-label">Project View</div>
             </div>
           `;
@@ -862,7 +864,7 @@
           progressGrid.innerHTML = p.site_progress.map((sp, i) => `
           <div class="fade-up" style="text-align: center;">
             <div style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-              <img src="${sp.image_url || p.image_url || 'images/project-default.webp'}" alt="${sp.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
+              <img decoding="async" src="${sp.image_url || p.image_url || 'images/project-default.webp'}" alt="${sp.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
             </div>
             <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase ${i + 1}: ${sp.title || 'In Progress'}</h4>
             <p style="font-size: 0.9rem; color: var(--text-secondary);">${sp.desc || ''}</p>

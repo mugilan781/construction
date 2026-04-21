@@ -36,6 +36,9 @@ document.addEventListener('click', (e) => {
 
 // DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
+  // Trigger main content fade-in
+  document.querySelector(".main-content")?.classList.add("loaded");
+
   // Close mobile menu on link click
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {

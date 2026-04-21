@@ -39,14 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Trigger main content fade-in
   document.querySelector(".main-content")?.classList.add("loaded");
 
-  // Global image load handler to prevent flash and force cache-busting
+  // Global image load handler to prevent flash
   document.querySelectorAll("img").forEach(img => {
-    // Dynamic Cache Busting
-    const src = img.getAttribute("src");
-    if (src && !src.includes("?v=") && !src.startsWith("data:")) {
-      img.setAttribute("src", src + "?v=" + Date.now());
-    }
-
     if (img.complete) {
       img.classList.add("loaded");
     } else {

@@ -2,6 +2,13 @@
 // INFRANEST — Frontend JS v3.0
 // ============================================
 
+// BFCache fix: Force reload when navigating via back/forward buttons
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
+
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('.navbar');
@@ -48,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         img.classList.add("loaded");
       });
       img.addEventListener("error", () => {
-        img.style.opacity = "1";
+        img.style.visibility = "visible";
       });
     }
   });

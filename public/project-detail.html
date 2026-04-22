@@ -407,256 +407,273 @@
   </nav>
   <div class="main-content">
 
-  <div class="page-header">
-    <h1 id="projectTitle">Project Showcase</h1>
-    <p class="page-header-desc">A modern architectural masterpiece blending elegance and functionality.</p>
-    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <a href="projects.html">Projects</a>
-      <span>/</span> <span id="projectBreadcrumb">Detailed View</span></div>
-  </div>
+    <div class="page-header">
+      <h1 id="projectTitle">Project Showcase</h1>
+      <p class="page-header-desc">A modern architectural masterpiece blending elegance and functionality.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <a href="projects.html">Projects</a>
+        <span>/</span> <span id="projectBreadcrumb">Detailed View</span>
+      </div>
+    </div>
 
-  <!-- ========== PROJECT STORY + SIDEBAR ========== -->
-  <section class="section">
-    <div class="grid-2" style="grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: flex-start;">
-      <!-- MAIN CONTENT -->
+    <!-- ========== PROJECT STORY + SIDEBAR ========== -->
+    <section class="section">
+      <div class="grid-2" style="grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: flex-start;">
+        <!-- MAIN CONTENT -->
+        <div class="fade-up">
+          <img decoding="async" id="mainProjectImg" src="/images/project-residential.webp?v=1" alt="Project Hero"
+            style="width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius-lg); margin-bottom:40px; box-shadow:var(--shadow-lg);"
+            fetchpriority="high">
+
+          <div class="section-subtitle">The Masterpiece</div>
+          <h2 class="section-title" style="text-align:left; font-size:2.8rem; margin-bottom:28px;">Architectural
+            Statement
+          </h2>
+          <div id="projectDescriptionContainer"
+            style="font-size:1.05rem; line-height:1.95; font-weight:300; font-family:'Inter', sans-serif; max-width:680px; color:var(--text-secondary);"
+            class="prose max-w-none"></div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="fade-up">
+          <div class="project-info-sidebar">
+            <h3
+              style="font-size:1.5rem; margin-bottom:30px; border-bottom:2px solid var(--accent); display:inline-block; padding-bottom:8px;">
+              Project Profile</h3>
+
+            <div class="project-meta-item">
+              <div class="project-meta-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <div class="project-meta-label">Location</div>
+                <div class="project-meta-value" id="projectLoc">Anna Nagar, Chennai</div>
+              </div>
+            </div>
+            <div class="project-meta-item">
+              <div class="project-meta-icon"><i class="fas fa-calendar-alt"></i></div>
+              <div>
+                <div class="project-meta-label">Year Completed</div>
+                <div class="project-meta-value">2024</div>
+              </div>
+            </div>
+            <div class="project-meta-item">
+              <div class="project-meta-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+              <div>
+                <div class="project-meta-label">Total Area</div>
+                <div class="project-meta-value">12,500 sq. ft.</div>
+              </div>
+            </div>
+            <div class="project-meta-item">
+              <div class="project-meta-icon"><i class="fas fa-user-tie"></i></div>
+              <div>
+                <div class="project-meta-label">Chief Architect</div>
+                <div class="project-meta-value">Ar. S. Venkatesh</div>
+              </div>
+            </div>
+            <div class="project-meta-item">
+              <div class="project-meta-icon"><i class="fas fa-tags"></i></div>
+              <div>
+                <div class="project-meta-label">Category</div>
+                <div class="project-meta-value" id="projectCat">Premium Residential</div>
+              </div>
+            </div>
+
+            <div style="margin-top:40px;">
+              <a href="contact.html?tab=quote" class="btn btn-primary"
+                style="width:100%; justify-content:center;">Inquire
+                About Similar Work</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROJECT GALLERY ========== -->
+    <section id="gallerySection" class="section section-light">
+      <div class="section-header fade-up">
+        <div class="section-subtitle">Visual Showcase</div>
+        <h2 class="section-title">Project Photography</h2>
+        <p class="section-desc">Capturing the craftsmanship and precision behind every detail of this project.</p>
+      </div>
+      <div class="project-gallery fade-up">
+        <div class="gallery-item">
+          <img decoding="async" src="/images/project-villa.webp?v=1" alt="Exterior View" class="gallery-img"
+            loading="lazy">
+          <div class="gallery-label">Exterior View</div>
+        </div>
+        <div class="gallery-item">
+          <img decoding="async" src="/images/project-corporate.webp?v=1" alt="Facade Detail" class="gallery-img"
+            loading="lazy">
+          <div class="gallery-label">Facade Detail</div>
+        </div>
+        <div class="gallery-item">
+          <img decoding="async" src="/images/project-apartments.webp?v=1" alt="Aerial Perspective" class="gallery-img"
+            loading="lazy">
+          <div class="gallery-label">Aerial Perspective</div>
+        </div>
+        <div class="gallery-item">
+          <img decoding="async" src="/images/project-techpark.webp?v=1" alt="Lobby Entrance" class="gallery-img"
+            loading="lazy">
+          <div class="gallery-label">Lobby Entrance</div>
+        </div>
+        <div class="gallery-item">
+          <img decoding="async" src="/images/project-commercial.webp?v=1" alt="Interior Space" class="gallery-img"
+            loading="lazy">
+          <div class="gallery-label">Interior Space</div>
+        </div>
+        <div class="gallery-item">
+          <img decoding="async" src="/images/project-steelplant.webp?v=1" alt="Structural Framework" class="gallery-img"
+            loading="lazy">
+          <div class="gallery-label">Structural Framework</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== VIDEO WALKTHROUGH (NEW) ========== -->
+    <section id="videoSection" class="section section-dark" style="text-align:center; padding: 100px 0; display:none;">
+      <div class="section-header fade-up" style="margin-bottom: 40px;">
+        <div class="section-subtitle" style="color:var(--accent);">Immersive Experience</div>
+        <h2 class="section-title" style="color:var(--white);">Video Walkthrough</h2>
+        <p class="section-desc" style="color:rgba(255,255,255,0.7);">Experience the project in motion through our
+          detailed
+          guided tour.</p>
+      </div>
+      <div class="fade-up" style="max-width: 900px; margin: 0 auto; padding: 0 24px;">
+        <div
+          style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
+          <!-- Using a placeholder video since the user doesn't have an exact one -->
+          <iframe id="videoIframe" src="" title="Project Walkthrough" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BEFORE & AFTER ========== -->
+    <section class="section">
+      <div class="section-header fade-up">
+        <div class="section-subtitle">Transformation</div>
+        <h2 class="section-title">Before &amp; After</h2>
+        <p class="section-desc">Witness the remarkable transformation from raw structure to a finished architectural
+          landmark.</p>
+      </div>
+      <div class="before-after-grid fade-up">
+        <div class="ba-item">
+          <img decoding="async" id="beforeImg" src="/images/project-before.webp?v=1" alt="Before Construction"
+            loading="lazy">
+          <div class="ba-badge">Before</div>
+          <div class="ba-divider"></div>
+        </div>
+        <div class="ba-item">
+          <img decoding="async" id="afterImg" src="/images/project-after.webp?v=1" alt="After Construction"
+            loading="lazy">
+          <div class="ba-badge after">After</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SITE PROGRESS VISUALS (NEW) ========== -->
+    <section class="section">
+      <div class="section-header fade-up">
+        <div class="section-subtitle">Construction Timeline</div>
+        <h2 class="section-title">Site Progress</h2>
+        <p class="section-desc">Track the evolution of the project from groundbreaking to the final touches.</p>
+      </div>
+      <div id="siteProgressGrid" class="grid-4 fade-up" style="max-width: 1200px; margin: 0 auto; gap: 24px;">
+        <div style="text-align: center;">
+          <div
+            style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
+            <img decoding="async" src="/images/project-before.webp?v=1" alt="Phase 1"
+              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
+              onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+              loading="lazy">
+          </div>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 1: Foundation</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Excavation &amp; Substructure</p>
+        </div>
+        <div style="text-align: center;">
+          <div
+            style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
+            <img decoding="async" src="/images/project-industrial.webp?v=1" alt="Phase 2"
+              style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: transform 0.4s ease;"
+              onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+              loading="lazy">
+          </div>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 2: Framing</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Superstructure Assembly</p>
+        </div>
+        <div style="text-align: center;">
+          <div
+            style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
+            <img decoding="async" src="/images/project-commercial.webp?v=1" alt="Phase 3"
+              style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(10%); transition: transform 0.4s ease;"
+              onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+              loading="lazy">
+          </div>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 3: Exteriors</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Facade &amp; Glazing</p>
+        </div>
+        <div style="text-align: center;">
+          <div
+            style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
+            <img decoding="async" id="progressFinalImg" src="/images/project-residential.webp?v=1" alt="Phase 4"
+              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
+              onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
+              loading="lazy">
+          </div>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 4: Completion</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Interiors &amp; Handover</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MATERIALS & CONCEPT ========== -->
+    <section class="section section-light">
+      <div class="section-header fade-up">
+        <div class="section-subtitle">Craftsmanship</div>
+        <h2 class="section-title">Materials &amp; Concept</h2>
+        <p class="section-desc">Premium materials and innovative techniques define every aspect of this build.</p>
+      </div>
+      <div id="dynamicMaterialsGrid" class="materials-grid fade-up">
+        <div class="material-card">
+          <div class="material-icon"><i class="fas fa-gem"></i></div>
+          <h4>Italian Marble</h4>
+          <p>Imported Carrara marble flooring throughout common areas and grand entrance lobby.</p>
+        </div>
+        <div class="material-card">
+          <div class="material-icon"><i class="fas fa-solar-panel"></i></div>
+          <h4>Smart Glass</h4>
+          <p>Energy-efficient double-glazed panels with UV filtering and thermal insulation technology.</p>
+        </div>
+        <div class="material-card">
+          <div class="material-icon"><i class="fas fa-shield-alt"></i></div>
+          <h4>Reinforced Steel</h4>
+          <p>High-tensile TMT bars with seismic-resistant engineering for structural durability.</p>
+        </div>
+        <div class="material-card">
+          <div class="material-icon"><i class="fas fa-leaf"></i></div>
+          <h4>Sustainable Design</h4>
+          <p>Rainwater harvesting, solar integration, and cross-ventilation for eco-friendly living.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROJECT CTA ========== -->
+    <section class="section section-dark" style="text-align:center;">
       <div class="fade-up">
-        <img decoding="async" id="mainProjectImg" src="images/project-residential.webp?v=1" alt="Project Hero"
-          style="width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius-lg); margin-bottom:40px; box-shadow:var(--shadow-lg);" fetchpriority="high">
-
-        <div class="section-subtitle">The Masterpiece</div>
-        <h2 class="section-title" style="text-align:left; font-size:2.8rem; margin-bottom:28px;">Architectural Statement
-        </h2>
-        <div id="projectDescriptionContainer"
-          style="font-size:1.05rem; line-height:1.95; font-weight:300; font-family:'Inter', sans-serif; max-width:680px; color:var(--text-secondary);"
-          class="prose max-w-none"></div>
-      </div>
-
-      <!-- SIDEBAR -->
-      <div class="fade-up">
-        <div class="project-info-sidebar">
-          <h3
-            style="font-size:1.5rem; margin-bottom:30px; border-bottom:2px solid var(--accent); display:inline-block; padding-bottom:8px;">
-            Project Profile</h3>
-
-          <div class="project-meta-item">
-            <div class="project-meta-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div>
-              <div class="project-meta-label">Location</div>
-              <div class="project-meta-value" id="projectLoc">Anna Nagar, Chennai</div>
-            </div>
-          </div>
-          <div class="project-meta-item">
-            <div class="project-meta-icon"><i class="fas fa-calendar-alt"></i></div>
-            <div>
-              <div class="project-meta-label">Year Completed</div>
-              <div class="project-meta-value">2024</div>
-            </div>
-          </div>
-          <div class="project-meta-item">
-            <div class="project-meta-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-            <div>
-              <div class="project-meta-label">Total Area</div>
-              <div class="project-meta-value">12,500 sq. ft.</div>
-            </div>
-          </div>
-          <div class="project-meta-item">
-            <div class="project-meta-icon"><i class="fas fa-user-tie"></i></div>
-            <div>
-              <div class="project-meta-label">Chief Architect</div>
-              <div class="project-meta-value">Ar. S. Venkatesh</div>
-            </div>
-          </div>
-          <div class="project-meta-item">
-            <div class="project-meta-icon"><i class="fas fa-tags"></i></div>
-            <div>
-              <div class="project-meta-label">Category</div>
-              <div class="project-meta-value" id="projectCat">Premium Residential</div>
-            </div>
-          </div>
-
-          <div style="margin-top:40px;">
-            <a href="contact.html?tab=quote" class="btn btn-primary" style="width:100%; justify-content:center;">Inquire
-              About Similar Work</a>
-          </div>
+        <div class="section-subtitle" style="color:var(--accent);">Ready to Start?</div>
+        <h2 class="section-title" style="color:var(--white); margin-bottom:22px;">Inspired by This Project?</h2>
+        <p
+          style="color:rgba(255,255,255,0.6); max-width:560px; margin:0 auto 40px; font-size:1.02rem; font-family:'Inter', sans-serif; font-weight:300; line-height:1.85;">
+          Let's create something extraordinary together. Our team is ready to bring your vision to life.</p>
+        <div style="display:flex; gap:18px; justify-content:center; flex-wrap:wrap;">
+          <a href="contact.html?tab=quote" class="btn btn-primary" style="padding:18px 42px; font-size:0.9rem;"><i
+              class="fas fa-paper-plane"></i> Enquire About Your Project</a>
+          <a href="projects.html" class="btn btn-outline" style="padding:18px 42px; font-size:0.9rem;"><i
+              class="fas fa-th-large"></i> View More Projects</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== PROJECT GALLERY ========== -->
-  <section id="gallerySection" class="section section-light">
-    <div class="section-header fade-up">
-      <div class="section-subtitle">Visual Showcase</div>
-      <h2 class="section-title">Project Photography</h2>
-      <p class="section-desc">Capturing the craftsmanship and precision behind every detail of this project.</p>
-    </div>
-    <div class="project-gallery fade-up">
-      <div class="gallery-item">
-        <img decoding="async" src="images/project-villa.webp?v=1" alt="Exterior View" class="gallery-img" loading="lazy">
-        <div class="gallery-label">Exterior View</div>
-      </div>
-      <div class="gallery-item">
-        <img decoding="async" src="images/project-corporate.webp?v=1" alt="Facade Detail" class="gallery-img" loading="lazy">
-        <div class="gallery-label">Facade Detail</div>
-      </div>
-      <div class="gallery-item">
-        <img decoding="async" src="images/project-apartments.webp?v=1" alt="Aerial Perspective" class="gallery-img" loading="lazy">
-        <div class="gallery-label">Aerial Perspective</div>
-      </div>
-      <div class="gallery-item">
-        <img decoding="async" src="images/project-techpark.webp?v=1" alt="Lobby Entrance" class="gallery-img" loading="lazy">
-        <div class="gallery-label">Lobby Entrance</div>
-      </div>
-      <div class="gallery-item">
-        <img decoding="async" src="images/project-commercial.webp?v=1" alt="Interior Space" class="gallery-img" loading="lazy">
-        <div class="gallery-label">Interior Space</div>
-      </div>
-      <div class="gallery-item">
-        <img decoding="async" src="images/project-steelplant.webp?v=1" alt="Structural Framework" class="gallery-img" loading="lazy">
-        <div class="gallery-label">Structural Framework</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== VIDEO WALKTHROUGH (NEW) ========== -->
-  <section id="videoSection" class="section section-dark" style="text-align:center; padding: 100px 0; display:none;">
-    <div class="section-header fade-up" style="margin-bottom: 40px;">
-      <div class="section-subtitle" style="color:var(--accent);">Immersive Experience</div>
-      <h2 class="section-title" style="color:var(--white);">Video Walkthrough</h2>
-      <p class="section-desc" style="color:rgba(255,255,255,0.7);">Experience the project in motion through our detailed
-        guided tour.</p>
-    </div>
-    <div class="fade-up" style="max-width: 900px; margin: 0 auto; padding: 0 24px;">
-      <div
-        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
-        <!-- Using a placeholder video since the user doesn't have an exact one -->
-        <iframe id="videoIframe" src="" title="Project Walkthrough" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== BEFORE & AFTER ========== -->
-  <section class="section">
-    <div class="section-header fade-up">
-      <div class="section-subtitle">Transformation</div>
-      <h2 class="section-title">Before &amp; After</h2>
-      <p class="section-desc">Witness the remarkable transformation from raw structure to a finished architectural
-        landmark.</p>
-    </div>
-    <div class="before-after-grid fade-up">
-      <div class="ba-item">
-        <img decoding="async" id="beforeImg" src="images/project-before.webp?v=1" alt="Before Construction" loading="lazy">
-        <div class="ba-badge">Before</div>
-        <div class="ba-divider"></div>
-      </div>
-      <div class="ba-item">
-        <img decoding="async" id="afterImg" src="images/project-after.webp?v=1" alt="After Construction" loading="lazy">
-        <div class="ba-badge after">After</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SITE PROGRESS VISUALS (NEW) ========== -->
-  <section class="section">
-    <div class="section-header fade-up">
-      <div class="section-subtitle">Construction Timeline</div>
-      <h2 class="section-title">Site Progress</h2>
-      <p class="section-desc">Track the evolution of the project from groundbreaking to the final touches.</p>
-    </div>
-    <div id="siteProgressGrid" class="grid-4 fade-up" style="max-width: 1200px; margin: 0 auto; gap: 24px;">
-      <div style="text-align: center;">
-        <div
-          style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img decoding="async" src="images/project-before.webp?v=1" alt="Phase 1"
-            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
-        </div>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 1: Foundation</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">Excavation &amp; Substructure</p>
-      </div>
-      <div style="text-align: center;">
-        <div
-          style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img decoding="async" src="images/project-industrial.webp?v=1" alt="Phase 2"
-            style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: transform 0.4s ease;"
-            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
-        </div>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 2: Framing</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">Superstructure Assembly</p>
-      </div>
-      <div style="text-align: center;">
-        <div
-          style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img decoding="async" src="images/project-commercial.webp?v=1" alt="Phase 3"
-            style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(10%); transition: transform 0.4s ease;"
-            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
-        </div>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 3: Exteriors</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">Facade &amp; Glazing</p>
-      </div>
-      <div style="text-align: center;">
-        <div
-          style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-          <img decoding="async" id="progressFinalImg" src="images/project-residential.webp?v=1" alt="Phase 4"
-            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
-        </div>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase 4: Completion</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">Interiors &amp; Handover</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== MATERIALS & CONCEPT ========== -->
-  <section class="section section-light">
-    <div class="section-header fade-up">
-      <div class="section-subtitle">Craftsmanship</div>
-      <h2 class="section-title">Materials &amp; Concept</h2>
-      <p class="section-desc">Premium materials and innovative techniques define every aspect of this build.</p>
-    </div>
-    <div id="dynamicMaterialsGrid" class="materials-grid fade-up">
-      <div class="material-card">
-        <div class="material-icon"><i class="fas fa-gem"></i></div>
-        <h4>Italian Marble</h4>
-        <p>Imported Carrara marble flooring throughout common areas and grand entrance lobby.</p>
-      </div>
-      <div class="material-card">
-        <div class="material-icon"><i class="fas fa-solar-panel"></i></div>
-        <h4>Smart Glass</h4>
-        <p>Energy-efficient double-glazed panels with UV filtering and thermal insulation technology.</p>
-      </div>
-      <div class="material-card">
-        <div class="material-icon"><i class="fas fa-shield-alt"></i></div>
-        <h4>Reinforced Steel</h4>
-        <p>High-tensile TMT bars with seismic-resistant engineering for structural durability.</p>
-      </div>
-      <div class="material-card">
-        <div class="material-icon"><i class="fas fa-leaf"></i></div>
-        <h4>Sustainable Design</h4>
-        <p>Rainwater harvesting, solar integration, and cross-ventilation for eco-friendly living.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PROJECT CTA ========== -->
-  <section class="section section-dark" style="text-align:center;">
-    <div class="fade-up">
-      <div class="section-subtitle" style="color:var(--accent);">Ready to Start?</div>
-      <h2 class="section-title" style="color:var(--white); margin-bottom:22px;">Inspired by This Project?</h2>
-      <p
-        style="color:rgba(255,255,255,0.6); max-width:560px; margin:0 auto 40px; font-size:1.02rem; font-family:'Inter', sans-serif; font-weight:300; line-height:1.85;">
-        Let's create something extraordinary together. Our team is ready to bring your vision to life.</p>
-      <div style="display:flex; gap:18px; justify-content:center; flex-wrap:wrap;">
-        <a href="contact.html?tab=quote" class="btn btn-primary" style="padding:18px 42px; font-size:0.9rem;"><i
-            class="fas fa-paper-plane"></i> Enquire About Your Project</a>
-        <a href="projects.html" class="btn btn-outline" style="padding:18px 42px; font-size:0.9rem;"><i
-            class="fas fa-th-large"></i> View More Projects</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
+    <!-- ========== FOOTER ========== -->
   </div>
   <footer class="footer">
     <div class="footer-grid">
@@ -772,7 +789,7 @@
         // Update main hero image
         const mainImg = document.getElementById('mainProjectImg');
         if (mainImg) {
-          mainImg.src = p.image_url || 'images/project-default.webp';
+          mainImg.src = p.image_url || '/images/project-default.webp';
           mainImg.alt = p.title;
         }
 
@@ -837,13 +854,13 @@
           // Use p.images if available, otherwise fallback to main project image p.image_url
           const displayImages = (p.images && p.images.length > 0)
             ? p.images
-            : [{ image_url: p.image_url || 'images/project-default.webp' }];
+            : [{ image_url: p.image_url || '/images/project-default.webp' }];
 
           galleryContainer.innerHTML = displayImages.map(img => {
             let finalSrc = img.image_url;
             return `
             <div class="gallery-item fade-up">
-              <img decoding="async" src="${finalSrc}" alt="Project View" class="gallery-img" onerror="this.src='images/project-default.webp?v=1'" loading="lazy">
+              <img decoding="async" src="${finalSrc}" alt="Project View" class="gallery-img" onerror="this.src='/images/project-default.webp?v=1'" loading="lazy">
               <div class="gallery-label">Project View</div>
             </div>
           `;
@@ -855,8 +872,8 @@
         // Update before/after images
         const beforeImg = document.getElementById('beforeImg');
         const afterImg = document.getElementById('afterImg');
-        if (beforeImg) { beforeImg.src = p.before_image || p.image_url || 'images/project-before.webp'; }
-        if (afterImg) { afterImg.src = p.after_image || p.image_url || 'images/project-after.webp'; }
+        if (beforeImg) { beforeImg.src = p.before_image || p.image_url || '/images/project-before.webp'; }
+        if (afterImg) { afterImg.src = p.after_image || p.image_url || '/images/project-after.webp'; }
 
         // Update Site Progress Dynamic Rendering
         const progressGrid = document.getElementById('siteProgressGrid');
@@ -864,7 +881,7 @@
           progressGrid.innerHTML = p.site_progress.map((sp, i) => `
           <div class="fade-up" style="text-align: center;">
             <div style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
-              <img decoding="async" src="${sp.image_url || p.image_url || 'images/project-default.webp'}" alt="${sp.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
+              <img decoding="async" src="${sp.image_url || p.image_url || '/images/project-default.webp'}" alt="${sp.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
             </div>
             <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 6px;">Phase ${i + 1}: ${sp.title || 'In Progress'}</h4>
             <p style="font-size: 0.9rem; color: var(--text-secondary);">${sp.desc || ''}</p>

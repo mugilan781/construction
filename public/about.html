@@ -1,103 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us — InfraNest</title>
-  <meta name="description" content="Learn about InfraNest's legacy, our expert team, and our commitment to construction excellence.">
+  <meta name="description"
+    content="Learn about InfraNest's legacy, our expert team, and our commitment to construction excellence.">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Typography & Spacing */
-    .text-center { text-align: center; }
-    .text-center .section-subtitle { display: block; }
-    .text-center .section-title::after {
-      content: ''; display: block; width: 60px; height: 3px;
-      background: var(--accent); margin: 12px auto 0; border-radius: 2px;
+    .text-center {
+      text-align: center;
     }
-    p.card-text { max-width: 650px; line-height: 1.75; }
+
+    .text-center .section-subtitle {
+      display: block;
+    }
+
+    .text-center .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    p.card-text {
+      max-width: 650px;
+      line-height: 1.75;
+    }
 
     /* Hero Enhancement */
-    .hero-fade-in { animation: heroFadeIn 1s ease-out forwards; opacity: 0; transform: translateY(15px); }
-    .hero-fade-in:nth-child(2) { animation-delay: 0.2s; }
-    .hero-fade-in:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes heroFadeIn { to { opacity: 1; transform: translateY(0); } }
+    .hero-fade-in {
+      animation: heroFadeIn 1s ease-out forwards;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .hero-fade-in:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .hero-fade-in:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes heroFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     /* Journey Enhancements */
-    .fade-in-left { animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateX(-30px); }
-    .fade-in-right { animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateX(30px); }
-    @keyframes fadeInLeft { to { opacity: 1; transform: translateX(0); } }
-    @keyframes fadeInRight { to { opacity: 1; transform: translateX(0); } }
-    .journey-img-wrapper { position: relative; overflow: hidden; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 8px solid var(--white); }
-    .journey-img { width: 100%; height: auto; transition: transform 0.5s ease; display: block; }
-    .journey-img-wrapper:hover .journey-img { transform: scale(1.04); }
-    .floating-badge { position: absolute; bottom: 30px; left: -30px; background: var(--accent); color: var(--white); padding: 10px; border-radius: 50%; font-weight: bold; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); text-align: center; line-height: 1.2; border: 4px solid var(--white); z-index: 10; }
+    .fade-in-left {
+      animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    .fade-in-right {
+      animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateX(30px);
+    }
+
+    @keyframes fadeInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .journey-img-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 8px solid var(--white);
+    }
+
+    .journey-img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .journey-img-wrapper:hover .journey-img {
+      transform: scale(1.04);
+    }
+
+    .floating-badge {
+      position: absolute;
+      bottom: 30px;
+      left: -30px;
+      background: var(--accent);
+      color: var(--white);
+      padding: 10px;
+      border-radius: 50%;
+      font-weight: bold;
+      width: 110px;
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      line-height: 1.2;
+      border: 4px solid var(--white);
+      z-index: 10;
+    }
 
     /* Timeline Section */
-    .timeline { position: relative; padding-left: 40px; max-width: 800px; margin: 0 auto; }
-    .timeline::before { content: ''; position: absolute; left: 20px; top: 0; width: 2px; height: 100%; background: rgba(201,169,110,0.3); }
-    .timeline-item { position: relative; margin-bottom: 40px; }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-dot { position: absolute; left: -25px; top: 6px; width: 14px; height: 14px; background: var(--accent); border-radius: 50%; border: 3px solid var(--white); box-shadow: 0 0 0 2px rgba(201,169,110,0.2); transition: transform 0.3s ease; }
-    .timeline-content { padding: 24px 30px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: var(--transition); border-left: 3px solid transparent; }
-    .timeline-item:hover .timeline-content { box-shadow: var(--shadow-md); border-color: var(--accent); transform: translateY(-3px); }
-    .timeline-item:hover .timeline-dot { transform: scale(1.2); }
-    .timeline-year { font-size: 1.4rem; color: var(--accent); font-weight: bold; margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; }
-    .timeline-title { font-weight: 600; font-size: 1.05rem; margin-bottom: 8px; color: var(--primary); }
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: rgba(201, 169, 110, 0.3);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-content {
+      padding: 24px 30px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-left: 3px solid transparent;
+    }
+
+    .timeline-item:hover .timeline-content {
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.2);
+    }
+
+    .timeline-year {
+      font-size: 1.4rem;
+      color: var(--accent);
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
 
     /* Vision/Mission Hover */
-    .why-card { transition: transform 0.4s ease, box-shadow 0.4s ease; background: linear-gradient(180deg, var(--white) 0%, rgba(201,169,110,0.03) 100%); }
-    .why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .why-card:hover .why-icon { transform: scale(1.1); }
-    .why-icon { transition: transform 0.3s ease; }
+    .why-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      background: linear-gradient(180deg, var(--white) 0%, rgba(201, 169, 110, 0.03) 100%);
+    }
+
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .why-card:hover .why-icon {
+      transform: scale(1.1);
+    }
+
+    .why-icon {
+      transition: transform 0.3s ease;
+    }
 
     /* Why Choose Us & Team */
-    .choose-icon { font-size: 2.2rem; color: var(--accent); margin-bottom: 18px; }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-    .team-card { position: relative; overflow: hidden; border-radius: var(--radius-md); box-shadow: var(--shadow-md); transition: var(--transition); background: var(--white); }
-    .team-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-5px); }
-    .team-img-wrapper { position: relative; overflow: hidden; height: 340px; }
-    .team-img-wrapper img { width: 100%; height: 340px; object-fit: cover; object-position: top center; transition: transform 0.5s ease; border-radius:16px; }
-    .team-card:hover .team-img-wrapper img { transform: scale(1.05); }
-    .team-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 80%); transition: var(--transition); pointer-events: none; border-radius:16px; }
-    .team-card:hover .team-overlay { opacity: 1; }
-    .team-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; color: var(--white); z-index: 2; transform: translateY(10px); transition: transform 0.4s ease; text-align: center; }
-    .team-card:hover .team-info { transform: translateY(0); }
-    .team-name { font-size: 1.3rem; margin-bottom: 4px; font-weight: 600; color: var(--white); }
-    .team-role { font-size: 0.95rem; color: rgba(255,255,255,0.8); }
+    .choose-icon {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
 
-    @media(max-width: 768px) { .team-grid { grid-template-columns: 1fr; } }
-    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .team-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      background: var(--white);
+    }
+
+    .team-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+
+    .team-img-wrapper {
+      position: relative;
+      overflow: hidden;
+      height: 340px;
+    }
+
+    .team-img-wrapper img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.5s ease;
+      border-radius: 16px;
+    }
+
+    .team-card:hover .team-img-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .team-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 80%);
+      transition: var(--transition);
+      pointer-events: none;
+      border-radius: 16px;
+    }
+
+    .team-card:hover .team-overlay {
+      opacity: 1;
+    }
+
+    .team-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      color: var(--white);
+      z-index: 2;
+      transform: translateY(10px);
+      transition: transform 0.4s ease;
+      text-align: center;
+    }
+
+    .team-card:hover .team-info {
+      transform: translateY(0);
+    }
+
+    .team-name {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .team-role {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    @media(max-width: 768px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Testimonials */
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-    .testimonial-card { max-width: 100%; padding: 40px 30px; border-radius: 16px; background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.06); text-align: center; display: flex; flex-direction: column; justify-content: space-between; height: 100%; transition: transform 0.3s ease; animation: fadeTestimonial 1s ease-in-out; }
-    .testimonial-card:hover { transform: translateY(-5px); }
-    @keyframes fadeTestimonial { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-    
-    @media(max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      max-width: 100%;
+      padding: 40px 30px;
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      transition: transform 0.3s ease;
+      animation: fadeTestimonial 1s ease-in-out;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+    }
+
+    @keyframes fadeTestimonial {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width: 900px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     /* === RESPONSIVE === */
     @media(max-width: 992px) {
-      .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
     }
+
     @media(max-width: 576px) {
-      .floating-badge { left: 10px !important; bottom: 10px !important; width: 85px !important; height: 85px !important; font-size: 0.75rem !important; padding: 6px !important; }
-      .team-grid { grid-template-columns: 1fr !important; }
-      .team-img-wrapper, .team-img-wrapper img { height: 280px !important; }
-      .timeline { padding-left: 24px; }
-      .timeline-content { padding: 16px 18px; }
-      .testimonials-grid { grid-template-columns: 1fr !important; }
-      .fade-in-left, .fade-in-right { animation: none !important; opacity: 1 !important; transform: none !important; }
+      .floating-badge {
+        left: 10px !important;
+        bottom: 10px !important;
+        width: 85px !important;
+        height: 85px !important;
+        font-size: 0.75rem !important;
+        padding: 6px !important;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .team-img-wrapper,
+      .team-img-wrapper img {
+        height: 280px !important;
+      }
+
+      .timeline {
+        padding-left: 24px;
+      }
+
+      .timeline-content {
+        padding: 16px 18px;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .fade-in-left,
+      .fade-in-right {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <a href="index.html" class="logo">Infra<span style="color: var(--accent);">Nest</span></a>
     <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="about.html" class="active">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+      <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a
+        href="about.html" class="active">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
     </div>
     <div class="nav-right">
       <a href="contact.html?tab=quote" class="nav-cta">Get a Quote</a>
@@ -107,278 +420,361 @@
           <!-- Populated by updateUserMenu() in main.js -->
         </div>
       </div>
-      
+
     </div>
     <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </nav>
   <div class="main-content">
 
-  <div class="page-header">
-    <h1>About InfraNest</h1>
-    <p class="page-header-desc">With over two decades of excellence, InfraNest delivers precision-driven construction solutions that redefine modern infrastructure.</p>
-    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <span>About Us</span></div>
-  </div>
+    <div class="page-header">
+      <h1>About InfraNest</h1>
+      <p class="page-header-desc">With over two decades of excellence, InfraNest delivers precision-driven construction
+        solutions that redefine modern infrastructure.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <span>About Us</span></div>
+    </div>
 
-  <!-- ========== TRUSTED BY (Client Logos - NEW) ========== -->
-  <section class="section section-light" style="padding: 40px 0; border-bottom: 1px solid rgba(0,0,0,0.05); background: var(--white);">
-    <div class="client-logos-marquee fade-up" style="overflow: hidden; white-space: nowrap; padding: 0 20px; width: 100%;">
-      <div style="display: inline-block; animation: marquee 25s linear infinite;">
-        <!-- Logos -->
-        <span class="client-logo-item"><i class="fas fa-city"></i> MetroCorp</span>
-        <span class="client-logo-item"><i class="fas fa-building"></i> Vertex Realty</span>
-        <span class="client-logo-item"><i class="fas fa-industry"></i> Titan Steel</span>
-        <span class="client-logo-item"><i class="fas fa-hotel"></i> Grand Hotels</span>
-        <span class="client-logo-item"><i class="fas fa-hospital"></i> Apex Health</span>
-        <span class="client-logo-item"><i class="fas fa-city"></i> MetroCorp</span>
-        <span class="client-logo-item"><i class="fas fa-building"></i> Vertex Realty</span>
-        <span class="client-logo-item"><i class="fas fa-industry"></i> Titan Steel</span>
+    <!-- ========== TRUSTED BY (Client Logos - NEW) ========== -->
+    <section class="section section-light"
+      style="padding: 40px 0; border-bottom: 1px solid rgba(0,0,0,0.05); background: var(--white);">
+      <div class="client-logos-marquee fade-up"
+        style="overflow: hidden; white-space: nowrap; padding: 0 20px; width: 100%;">
+        <div style="display: inline-block; animation: marquee 25s linear infinite;">
+          <!-- Logos -->
+          <span class="client-logo-item"><i class="fas fa-city"></i> MetroCorp</span>
+          <span class="client-logo-item"><i class="fas fa-building"></i> Vertex Realty</span>
+          <span class="client-logo-item"><i class="fas fa-industry"></i> Titan Steel</span>
+          <span class="client-logo-item"><i class="fas fa-hotel"></i> Grand Hotels</span>
+          <span class="client-logo-item"><i class="fas fa-hospital"></i> Apex Health</span>
+          <span class="client-logo-item"><i class="fas fa-city"></i> MetroCorp</span>
+          <span class="client-logo-item"><i class="fas fa-building"></i> Vertex Realty</span>
+          <span class="client-logo-item"><i class="fas fa-industry"></i> Titan Steel</span>
+        </div>
       </div>
-    </div>
-    <style>
-      .client-logo-item { display: inline-flex; align-items: center; gap: 12px; font-size: 1.6rem; color: var(--text-secondary); margin: 0 50px; font-family: 'Cormorant Garamond', serif; font-weight: 600; opacity: 0.5; transition: all 0.3s ease; cursor: default; }
-      .client-logo-item:hover { opacity: 1; color: var(--primary); transform: scale(1.05); }
-      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    </style>
-  </section>
+      <style>
+        .client-logo-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          font-size: 1.6rem;
+          color: var(--text-secondary);
+          margin: 0 50px;
+          font-family: 'Cormorant Garamond', serif;
+          font-weight: 600;
+          opacity: 0.5;
+          transition: all 0.3s ease;
+          cursor: default;
+        }
 
-  <section class="section" style="padding-top: 100px; padding-bottom: 80px;">
-    <div class="grid-2" style="align-items:center; gap:60px;">
-      <div class="fade-in-left">
-        <div class="section-subtitle">Our Journey</div>
-        <h2 class="section-title" style="text-align:left; font-size:2.8rem; margin-bottom:40px;">Two Decades of<br>Building Brilliance</h2>
-        <p class="card-text">Founded in 2005, InfraNest has evolved from a small collective of architects into one of the most respected construction firms in the nation. We don't just build structures; we craft environments that enrich lives.</p>
-        <p class="card-text">Our philosophy is simple: uncompromising quality, absolute transparency, and futuristic innovation. Every brick laid represents our commitment to excellence and our passion for structural integrity.</p>
-        <div class="grid-2" style="margin-top:40px;">
-          <div><h4 style="font-size:2rem; color:var(--accent); font-family:'Cormorant Garamond', serif;">250+</h4><p style="font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary);">Projects Delivered</p></div>
-          <div><h4 style="font-size:2rem; color:var(--accent); font-family:'Cormorant Garamond', serif;">18+</h4><p style="font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary);">Industry Awards</p></div>
-        </div>
-      </div>
-      <div class="fade-in-right" style="position:relative;">
-        <div class="journey-img-wrapper">
-          <img decoding="async" src="images/project-commercial.webp?v=1" alt="Our Journey" class="journey-img" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
+        .client-logo-item:hover {
+          opacity: 1;
+          color: var(--primary);
+          transform: scale(1.05);
+        }
 
-  <!-- TIMELINE (NEW) -->
-  <section class="section section-light" style="padding: 100px 60px;">
-    <div class="text-center fade-up" style="margin-bottom: 60px;">
-      <div class="section-subtitle text-center">Historical Milestones</div>
-      <h2 class="section-title text-center">Our Journey Timeline</h2>
-    </div>
-    
-    <div class="timeline fade-up">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">2005</div>
-          <div class="timeline-title">Company Founded</div>
-          <p class="card-text" style="font-size:0.95rem;">InfraNest was established with a core team of passionate architects driven by functional design.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">2010</div>
-          <div class="timeline-title">First Major Commercial Project</div>
-          <p class="card-text" style="font-size:0.95rem;">Delivered our first major tech park, establishing a strong footprint in commercial construction.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">2015</div>
-          <div class="timeline-title">Expansion into Industrial Sector</div>
-          <p class="card-text" style="font-size:0.95rem;">Branched out into heavy industrial structures, building massive robust warehouse complexes.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">2020</div>
-          <div class="timeline-title">Smart Construction Adoption</div>
-          <p class="card-text" style="font-size:0.95rem;">Integrated BIM technologies and sustainable green building protocols across all divisions.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-year">2025</div>
-          <div class="timeline-title">250+ Projects Delivered</div>
-          <p class="card-text" style="font-size:0.95rem;">Celebrating two decades of structural excellence with a globally recognized portfolio.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
 
-  <!-- VISION MISSION VALUES (ENHANCED) -->
-  <section class="section">
-    <div class="text-center fade-up" style="margin-bottom: 60px;">
-      <div class="section-subtitle text-center">Core Pillars</div>
-      <h2 class="section-title text-center">Vision, Mission & Values</h2>
-    </div>
-    <div class="grid-3 fade-up">
-      <div class="why-card" style="padding:45px 40px; border-radius: var(--radius-lg); text-align: left; border: 1px solid rgba(0,0,0,0.04);">
-        <div class="why-icon" style="width:64px; height:64px; font-size:1.5rem; background:rgba(201,169,110,0.12); margin-bottom:24px; border-radius:14px;"><i class="fas fa-eye"></i></div>
-        <h3 style="font-size:1.4rem; margin-bottom:12px;">Our Vision</h3>
-        <p class="card-text" style="font-size:0.95rem;">To be the global benchmark in construction excellence, known for pioneering sustainable and intelligent infrastructure.</p>
-      </div>
-      <div class="why-card" style="padding:45px 40px; border-radius: var(--radius-lg); text-align: left; border: 1px solid rgba(0,0,0,0.04);">
-        <div class="why-icon" style="width:64px; height:64px; font-size:1.5rem; background:rgba(201,169,110,0.12); margin-bottom:24px; border-radius:14px;"><i class="fas fa-bullseye"></i></div>
-        <h3 style="font-size:1.4rem; margin-bottom:12px;">Our Mission</h3>
-        <p class="card-text" style="font-size:0.95rem;">To deliver high-performance assets that exceed client expectations through innovative technology and expert craftsmanship.</p>
-      </div>
-      <div class="why-card" style="padding:45px 40px; border-radius: var(--radius-lg); text-align: left; border: 1px solid rgba(0,0,0,0.04);">
-        <div class="why-icon" style="width:64px; height:64px; font-size:1.5rem; background:rgba(201,169,110,0.12); margin-bottom:24px; border-radius:14px;"><i class="fas fa-heart"></i></div>
-        <h3 style="font-size:1.4rem; margin-bottom:12px;">Our Values</h3>
-        <p class="card-text" style="font-size:0.95rem;">Honesty, safety, and a relentless pursuit of perfection in every architectural detail we execute under all conditions.</p>
-      </div>
-    </div>
-  </section>
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      </style>
+    </section>
 
-  <!-- ========== CERTIFICATIONS (NEW) ========== -->
-  <section class="section section-light" id="certifications">
-    <div class="section-header fade-up">
-      <div class="section-subtitle">Excellence Recognized</div>
-      <h2 class="section-title">Awards & Certifications</h2>
-      <p class="section-desc">Our commitment to quality, safety, and sustainability is backed by global standards.</p>
-    </div>
-    <div class="grid-4 fade-up" style="max-width: 1100px; margin: 0 auto; gap: 24px;">
-      <div class="cert-card" style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
-        <i class="fas fa-award" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">ISO 9001:2015</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">Quality Management</p>
+    <section class="section" style="padding-top: 100px; padding-bottom: 80px;">
+      <div class="grid-2" style="align-items:center; gap:60px;">
+        <div class="fade-in-left">
+          <div class="section-subtitle">Our Journey</div>
+          <h2 class="section-title" style="text-align:left; font-size:2.8rem; margin-bottom:40px;">Two Decades
+            of<br>Building Brilliance</h2>
+          <p class="card-text">Founded in 2005, InfraNest has evolved from a small collective of architects into one of
+            the most respected construction firms in the nation. We don't just build structures; we craft environments
+            that enrich lives.</p>
+          <p class="card-text">Our philosophy is simple: uncompromising quality, absolute transparency, and futuristic
+            innovation. Every brick laid represents our commitment to excellence and our passion for structural
+            integrity.</p>
+          <div class="grid-2" style="margin-top:40px;">
+            <div>
+              <h4 style="font-size:2rem; color:var(--accent); font-family:'Cormorant Garamond', serif;">250+</h4>
+              <p style="font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary);">
+                Projects Delivered</p>
+            </div>
+            <div>
+              <h4 style="font-size:2rem; color:var(--accent); font-family:'Cormorant Garamond', serif;">18+</h4>
+              <p style="font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-secondary);">
+                Industry Awards</p>
+            </div>
+          </div>
+        </div>
+        <div class="fade-in-right" style="position:relative;">
+          <div class="journey-img-wrapper">
+            <img decoding="async" src="/images/project-commercial.webp?v=1" alt="Our Journey" class="journey-img"
+              loading="lazy">
+          </div>
+        </div>
       </div>
-      <div class="cert-card" style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
-        <i class="fas fa-leaf" style="font-size: 3rem; color: #2ecc71; margin-bottom: 20px;"></i>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">LEED Gold</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">Green Building Council</p>
-      </div>
-      <div class="cert-card" style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
-        <i class="fas fa-hard-hat" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">OSHA Compliant</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">Safety & Health Standard</p>
-      </div>
-      <div class="cert-card" style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
-        <i class="fas fa-medal" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
-        <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">Best Builder 2024</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">National Construction Award</p>
-      </div>
-    </div>
-    <style> .cert-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(201,169,110,0.3); } </style>
-  </section>
+    </section>
 
-  <!-- WHY CHOOSE US (NEW) -->
-  <section class="section section-dark">
-    <div class="text-center fade-up" style="margin-bottom: 60px;">
-      <div class="section-subtitle text-center" style="color:var(--accent);">The InfraNest Advantage</div>
-      <h2 class="section-title text-center" style="color:var(--white);">Why Choose Us</h2>
-    </div>
-    <div class="grid-4 fade-up">
-      <div style="text-align:center;">
-        <i class="fas fa-certificate choose-icon"></i>
-        <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">20+ Years Exp.</h3>
-        <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Two decades of mastered craft.</p>
+    <!-- TIMELINE (NEW) -->
+    <section class="section section-light" style="padding: 100px 60px;">
+      <div class="text-center fade-up" style="margin-bottom: 60px;">
+        <div class="section-subtitle text-center">Historical Milestones</div>
+        <h2 class="section-title text-center">Our Journey Timeline</h2>
       </div>
-      <div style="text-align:center;">
-        <i class="fas fa-building choose-icon"></i>
-        <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">250+ Projects</h3>
-        <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">From residential to industrial.</p>
-      </div>
-      <div style="text-align:center;">
-        <i class="fas fa-smile choose-icon"></i>
-        <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">100% Satisfaction</h3>
-        <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Client-first dedicated focus.</p>
-      </div>
-      <div style="text-align:center;">
-        <i class="fas fa-cogs choose-icon"></i>
-        <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">Advanced Engineering</h3>
-        <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Leveraging modern BIM tech.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- OUR TEAM (NEW) -->
-  <section class="section section-light">
-    <div class="text-center fade-up" style="margin-bottom: 60px;">
-      <div class="section-subtitle text-center">The Minds Behind The Structures</div>
-      <h2 class="section-title text-center">Our Executive Team</h2>
-    </div>
-    <div class="team-grid fade-up">
-      <div class="team-card">
-        <div class="team-img-wrapper">
-          <img decoding="async" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop" alt="Arthur Bennett" loading="lazy">
-          <div class="team-overlay"></div>
+      <div class="timeline fade-up">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2005</div>
+            <div class="timeline-title">Company Founded</div>
+            <p class="card-text" style="font-size:0.95rem;">InfraNest was established with a core team of passionate
+              architects driven by functional design.</p>
+          </div>
         </div>
-        <div class="team-info">
-          <div class="team-name">Arthur Bennett</div>
-          <div class="team-role">Lead Architect</div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2010</div>
+            <div class="timeline-title">First Major Commercial Project</div>
+            <p class="card-text" style="font-size:0.95rem;">Delivered our first major tech park, establishing a strong
+              footprint in commercial construction.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-title">Expansion into Industrial Sector</div>
+            <p class="card-text" style="font-size:0.95rem;">Branched out into heavy industrial structures, building
+              massive robust warehouse complexes.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-title">Smart Construction Adoption</div>
+            <p class="card-text" style="font-size:0.95rem;">Integrated BIM technologies and sustainable green building
+              protocols across all divisions.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2025</div>
+            <div class="timeline-title">250+ Projects Delivered</div>
+            <p class="card-text" style="font-size:0.95rem;">Celebrating two decades of structural excellence with a
+              globally recognized portfolio.</p>
+          </div>
         </div>
       </div>
-      <div class="team-card">
-        <div class="team-img-wrapper">
-          <img decoding="async" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Sarah Jenkins" loading="lazy">
-          <div class="team-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Sarah Jenkins</div>
-          <div class="team-role">Chief Structural Engineer</div>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-img-wrapper">
-          <img decoding="async" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop" alt="Marcus Cole" loading="lazy">
-          <div class="team-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Marcus Cole</div>
-          <div class="team-role">Head of Construction</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- TESTIMONIALS (NEW) -->
-  <section class="section">
-    <div class="text-center fade-up" style="margin-bottom: 60px;">
-      <div class="section-subtitle text-center">What Clients Say</div>
-      <h2 class="section-title text-center">Client Testimonials</h2>
-    </div>
-    <div class="testimonials-slider fade-up">
-      <div class="testimonials-track" id="aboutTestimonialsTrack">
-        <!-- Dynamic testimonials loaded via JS -->
-        <div style="width: 100%; text-align: center; padding: 40px; color: var(--accent);">
-          <i class="fas fa-spinner fa-spin fa-2x"></i>
-          <p style="margin-top: 10px;">Loading reviews...</p>
+    <!-- VISION MISSION VALUES (ENHANCED) -->
+    <section class="section">
+      <div class="text-center fade-up" style="margin-bottom: 60px;">
+        <div class="section-subtitle text-center">Core Pillars</div>
+        <h2 class="section-title text-center">Vision, Mission & Values</h2>
+      </div>
+      <div class="grid-3 fade-up">
+        <div class="why-card"
+          style="padding:45px 40px; border-radius: var(--radius-lg); text-align: left; border: 1px solid rgba(0,0,0,0.04);">
+          <div class="why-icon"
+            style="width:64px; height:64px; font-size:1.5rem; background:rgba(201,169,110,0.12); margin-bottom:24px; border-radius:14px;">
+            <i class="fas fa-eye"></i></div>
+          <h3 style="font-size:1.4rem; margin-bottom:12px;">Our Vision</h3>
+          <p class="card-text" style="font-size:0.95rem;">To be the global benchmark in construction excellence, known
+            for pioneering sustainable and intelligent infrastructure.</p>
+        </div>
+        <div class="why-card"
+          style="padding:45px 40px; border-radius: var(--radius-lg); text-align: left; border: 1px solid rgba(0,0,0,0.04);">
+          <div class="why-icon"
+            style="width:64px; height:64px; font-size:1.5rem; background:rgba(201,169,110,0.12); margin-bottom:24px; border-radius:14px;">
+            <i class="fas fa-bullseye"></i></div>
+          <h3 style="font-size:1.4rem; margin-bottom:12px;">Our Mission</h3>
+          <p class="card-text" style="font-size:0.95rem;">To deliver high-performance assets that exceed client
+            expectations through innovative technology and expert craftsmanship.</p>
+        </div>
+        <div class="why-card"
+          style="padding:45px 40px; border-radius: var(--radius-lg); text-align: left; border: 1px solid rgba(0,0,0,0.04);">
+          <div class="why-icon"
+            style="width:64px; height:64px; font-size:1.5rem; background:rgba(201,169,110,0.12); margin-bottom:24px; border-radius:14px;">
+            <i class="fas fa-heart"></i></div>
+          <h3 style="font-size:1.4rem; margin-bottom:12px;">Our Values</h3>
+          <p class="card-text" style="font-size:0.95rem;">Honesty, safety, and a relentless pursuit of perfection in
+            every architectural detail we execute under all conditions.</p>
         </div>
       </div>
-      <div class="slider-controls">
-        <button class="slider-btn" onclick="slideTestimonials(-1)"><i class="fas fa-arrow-left"></i></button>
-        <button class="slider-btn" onclick="slideTestimonials(1)"><i class="fas fa-arrow-right"></i></button>
-      </div>
-    </div>
-  </section>
-  
-  <!-- CTA Section -->
-  <section class="section section-dark" style="text-align:center; position:relative; overflow:hidden;">
-    <div style="position:absolute; inset:0; background: radial-gradient(circle at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 60%);"></div>
-    <div class="fade-up" style="position:relative; z-index:1;">
-      <h2 class="section-title text-center" style="color:var(--white);">Let’s Build Something Exceptional</h2>
-      <p style="color:rgba(255,255,255,0.6); max-width:540px; margin:0 auto 36px; font-family:'Inter', sans-serif; line-height: 1.8;">Our experts are ready to translate your vision into a structural reality.</p>
-      <a href="contact.html?tab=quote" class="btn btn-primary" style="padding: 16px 42px; font-size: 0.95rem; box-shadow: 0 4px 20px rgba(201,169,110,0.25);"><i class="fas fa-paper-plane"></i> Get a Quote</a>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
-          <!-- ========== FOOTER ========== -->
+    <!-- ========== CERTIFICATIONS (NEW) ========== -->
+    <section class="section section-light" id="certifications">
+      <div class="section-header fade-up">
+        <div class="section-subtitle">Excellence Recognized</div>
+        <h2 class="section-title">Awards & Certifications</h2>
+        <p class="section-desc">Our commitment to quality, safety, and sustainability is backed by global standards.</p>
+      </div>
+      <div class="grid-4 fade-up" style="max-width: 1100px; margin: 0 auto; gap: 24px;">
+        <div class="cert-card"
+          style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
+          <i class="fas fa-award" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">ISO 9001:2015</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Quality Management</p>
+        </div>
+        <div class="cert-card"
+          style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
+          <i class="fas fa-leaf" style="font-size: 3rem; color: #2ecc71; margin-bottom: 20px;"></i>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">LEED Gold</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Green Building Council</p>
+        </div>
+        <div class="cert-card"
+          style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
+          <i class="fas fa-hard-hat" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">OSHA Compliant</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Safety & Health Standard</p>
+        </div>
+        <div class="cert-card"
+          style="text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(0,0,0,0.03);">
+          <i class="fas fa-medal" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+          <h4 style="font-size: 1.15rem; color: var(--primary); margin-bottom: 8px;">Best Builder 2024</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">National Construction Award</p>
+        </div>
+      </div>
+      <style>
+        .cert-card:hover {
+          transform: translateY(-8px);
+          box-shadow: var(--shadow-lg);
+          border-color: rgba(201, 169, 110, 0.3);
+        }
+      </style>
+    </section>
+
+    <!-- WHY CHOOSE US (NEW) -->
+    <section class="section section-dark">
+      <div class="text-center fade-up" style="margin-bottom: 60px;">
+        <div class="section-subtitle text-center" style="color:var(--accent);">The InfraNest Advantage</div>
+        <h2 class="section-title text-center" style="color:var(--white);">Why Choose Us</h2>
+      </div>
+      <div class="grid-4 fade-up">
+        <div style="text-align:center;">
+          <i class="fas fa-certificate choose-icon"></i>
+          <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">20+ Years Exp.</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Two decades of mastered craft.</p>
+        </div>
+        <div style="text-align:center;">
+          <i class="fas fa-building choose-icon"></i>
+          <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">250+ Projects</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">From residential to industrial.</p>
+        </div>
+        <div style="text-align:center;">
+          <i class="fas fa-smile choose-icon"></i>
+          <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">100% Satisfaction</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Client-first dedicated focus.</p>
+        </div>
+        <div style="text-align:center;">
+          <i class="fas fa-cogs choose-icon"></i>
+          <h3 style="color:var(--white); font-size:1.2rem; margin-bottom:8px;">Advanced Engineering</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Leveraging modern BIM tech.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR TEAM (NEW) -->
+    <section class="section section-light">
+      <div class="text-center fade-up" style="margin-bottom: 60px;">
+        <div class="section-subtitle text-center">The Minds Behind The Structures</div>
+        <h2 class="section-title text-center">Our Executive Team</h2>
+      </div>
+      <div class="team-grid fade-up">
+        <div class="team-card">
+          <div class="team-img-wrapper">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop"
+              alt="Arthur Bennett" loading="lazy">
+            <div class="team-overlay"></div>
+          </div>
+          <div class="team-info">
+            <div class="team-name">Arthur Bennett</div>
+            <div class="team-role">Lead Architect</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-img-wrapper">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop"
+              alt="Sarah Jenkins" loading="lazy">
+            <div class="team-overlay"></div>
+          </div>
+          <div class="team-info">
+            <div class="team-name">Sarah Jenkins</div>
+            <div class="team-role">Chief Structural Engineer</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-img-wrapper">
+            <img decoding="async"
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop"
+              alt="Marcus Cole" loading="lazy">
+            <div class="team-overlay"></div>
+          </div>
+          <div class="team-info">
+            <div class="team-name">Marcus Cole</div>
+            <div class="team-role">Head of Construction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS (NEW) -->
+    <section class="section">
+      <div class="text-center fade-up" style="margin-bottom: 60px;">
+        <div class="section-subtitle text-center">What Clients Say</div>
+        <h2 class="section-title text-center">Client Testimonials</h2>
+      </div>
+      <div class="testimonials-slider fade-up">
+        <div class="testimonials-track" id="aboutTestimonialsTrack">
+          <!-- Dynamic testimonials loaded via JS -->
+          <div style="width: 100%; text-align: center; padding: 40px; color: var(--accent);">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+            <p style="margin-top: 10px;">Loading reviews...</p>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-btn" onclick="slideTestimonials(-1)"><i class="fas fa-arrow-left"></i></button>
+          <button class="slider-btn" onclick="slideTestimonials(1)"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section section-dark" style="text-align:center; position:relative; overflow:hidden;">
+      <div
+        style="position:absolute; inset:0; background: radial-gradient(circle at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 60%);">
+      </div>
+      <div class="fade-up" style="position:relative; z-index:1;">
+        <h2 class="section-title text-center" style="color:var(--white);">Let’s Build Something Exceptional</h2>
+        <p
+          style="color:rgba(255,255,255,0.6); max-width:540px; margin:0 auto 36px; font-family:'Inter', sans-serif; line-height: 1.8;">
+          Our experts are ready to translate your vision into a structural reality.</p>
+        <a href="contact.html?tab=quote" class="btn btn-primary"
+          style="padding: 16px 42px; font-size: 0.95rem; box-shadow: 0 4px 20px rgba(201,169,110,0.25);"><i
+            class="fas fa-paper-plane"></i> Get a Quote</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <!-- ========== FOOTER ========== -->
   </div>
   <footer class="footer">
     <div class="footer-grid">
       <!-- Col 1: Logo & Social -->
       <div class="footer-about">
         <a href="index.html" class="footer-logo">Infra<span>Nest</span></a>
-        <p class="dynamic-about">Delivering premium construction solutions with unmatched precision, quality, and innovation since 2005.</p>
+        <p class="dynamic-about">Delivering premium construction solutions with unmatched precision, quality, and
+          innovation since 2005.</p>
         <div class="footer-socials">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
@@ -386,7 +782,7 @@
           <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
-      
+
       <!-- Col 2: Quick Links -->
       <div class="footer-links">
         <h4>Quick Links</h4>
@@ -397,7 +793,7 @@
         <a href="blog.html">Blog</a>
         <a href="contact.html">Contact</a>
       </div>
-      
+
       <!-- Col 3: Services -->
       <div class="footer-links">
         <h4>Services</h4>
@@ -407,19 +803,24 @@
         <a href="service-detail.html?service=architecture">Architecture Planning</a>
         <a href="faq.html">FAQ</a>
       </div>
-      
+
       <!-- Col 4: Contact Info -->
       <div class="footer-contact">
         <h4>Contact Us</h4>
-        <div class="footer-contact-item"><i class="fas fa-map-marker-alt" style="margin-top:4px;"></i><span class="dynamic-address">123 Builder's Avenue, Chennai,<br>Tamil Nadu 600001</span></div>
-        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span class="dynamic-phone">+91 98765 43210</span></div>
-        <div class="footer-contact-item" style="margin-bottom:0;"><i class="fas fa-envelope"></i><span class="dynamic-email">info@infranest.com</span></div>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt" style="margin-top:4px;"></i><span
+            class="dynamic-address">123 Builder's Avenue, Chennai,<br>Tamil Nadu 600001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span class="dynamic-phone">+91 98765
+            43210</span></div>
+        <div class="footer-contact-item" style="margin-bottom:0;"><i class="fas fa-envelope"></i><span
+            class="dynamic-email">info@infranest.com</span></div>
       </div>
-      
+
       <!-- Col 5: Newsletter -->
       <div class="footer-newsletter">
         <h4>Newsletter</h4>
-        <p style="font-size:0.875rem; margin-bottom:16px; color:rgba(255,255,255,0.65); line-height:1.6; text-align:left;">Subscribe for construction tips, project updates, and industry news.</p>
+        <p
+          style="font-size:0.875rem; margin-bottom:16px; color:rgba(255,255,255,0.65); line-height:1.6; text-align:left;">
+          Subscribe for construction tips, project updates, and industry news.</p>
         <form class="footer-newsletter-form" onsubmit="event.preventDefault()">
           <input type="email" placeholder="Your email address" required>
           <button type="submit">Subscribe</button>
@@ -446,7 +847,7 @@
           const track = document.getElementById('aboutTestimonialsTrack');
           track.innerHTML = result.data.map((t, i) => {
             const initials = t.client_name.split(' ').map(n => n[0]).join('').toUpperCase();
-            const stars = Array.from({length: 5}, (_, i) => i < (t.rating || 5) ? '★' : '☆').join(' ');
+            const stars = Array.from({ length: 5 }, (_, i) => i < (t.rating || 5) ? '★' : '☆').join(' ');
             return `
               <div>
                 <div class="testimonial-card">
@@ -492,4 +893,5 @@
     });
   </script>
 </body>
+
 </html>

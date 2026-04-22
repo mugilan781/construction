@@ -253,13 +253,14 @@
       <h1 id="serviceTitle">Service Details</h1>
       <p id="serviceHeroDesc" class="page-header-desc"></p>
       <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <a href="services.html">Services</a>
-        <span>/</span> <span id="serviceBreadcrumb">Details</span></div>
+        <span>/</span> <span id="serviceBreadcrumb">Details</span>
+      </div>
     </div>
 
     <section class="section">
       <!-- MAIN IMAGE & OVERVIEW -->
       <div class="fade-up" style="margin-bottom: 48px;">
-        <img decoding="async" id="serviceMainImage" src="/images/service-construction.webp?v=1" alt="Service Image"
+        <img decoding="async" id="serviceMainImage" src="images/service-construction.webp?v=1" alt="Service Image"
           style="width:100%; height:460px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:var(--shadow-md);"
           fetchpriority="high">
       </div>
@@ -318,9 +319,9 @@
               <div class="main-img-overlay"
                 style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.1), transparent); border-radius: 16px; z-index: 2; pointer-events: none;">
               </div>
-              <img decoding="async" id="methodologyImgMain" src="/images/project-steelplant.webp?v=1"
+              <img decoding="async" id="methodologyImgMain" src="images/project-steelplant.webp?v=1"
                 alt="Methodology Main" class="main-img" loading="lazy">
-              <img decoding="async" id="methodologyImgSub" src="/images/project-industrial.webp?v=1"
+              <img decoding="async" id="methodologyImgSub" src="images/project-industrial.webp?v=1"
                 alt="Methodology Detail" class="sub-img float-anim" loading="lazy">
             </div>
           </div>
@@ -502,22 +503,22 @@
 
         // Determine Images
         const titleLower = service.name.toLowerCase();
-        let imgSrc = '/images/service-construction.webp';
-        let mainImgPath = '/images/project-steelplant.webp';
-        let subImgPath = '/images/project-industrial.webp';
+        let imgSrc = 'images/service-construction.webp';
+        let mainImgPath = 'images/project-steelplant.webp';
+        let subImgPath = 'images/project-industrial.webp';
 
         if (titleLower.includes('interior')) {
-          imgSrc = '/images/interior-livingroom.webp';
-          mainImgPath = '/images/interior-bedroom.webp';
-          subImgPath = '/images/interior-kitchen.webp';
+          imgSrc = 'images/interior-livingroom.webp';
+          mainImgPath = 'images/interior-bedroom.webp';
+          subImgPath = 'images/interior-kitchen.webp';
         } else if (titleLower.includes('renovation') || titleLower.includes('restoration')) {
-          imgSrc = '/images/project-before.webp';
-          mainImgPath = '/images/project-after.webp';
-          subImgPath = '/images/project-residential.webp';
+          imgSrc = 'images/project-before.webp';
+          mainImgPath = 'images/project-after.webp';
+          subImgPath = 'images/project-residential.webp';
         } else if (titleLower.includes('architecture')) {
-          imgSrc = '/images/about-team.webp';
-          mainImgPath = '/images/project-corporate.webp';
-          subImgPath = '/images/project-techpark.webp';
+          imgSrc = 'images/about-team.webp';
+          mainImgPath = 'images/project-corporate.webp';
+          subImgPath = 'images/project-techpark.webp';
         }
 
         // Updates

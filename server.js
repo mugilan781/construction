@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
@@ -60,16 +59,13 @@ const compression = require('compression');
 app.use(compression()); // Compress all responses to optimize payload
 
 // Static files with Cache-Control headers for optimizing image/asset loading times
-app.use(express.static(path.join(__dirname, 'public'), {
-  setHeaders: (res, filePath) => {
-    if (filePath.endsWith('.html')) {
+app.use(express.static('public', {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.html')) {
+      // Don't cache HTML to ensure fresh content
       res.setHeader('Cache-Control', 'no-store');
-    } else if (filePath.match(/\.(jpg|jpeg|png|webp|gif|svg)$/i)) {
-      // Images: 1 day cache only — not immutable!
-      res.setHeader('Cache-Control', 'public, max-age=86400');
     } else {
-      // CSS/JS: 1 week
-      res.setHeader('Cache-Control', 'public, max-age=604800');
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
     }
   }
 }));
